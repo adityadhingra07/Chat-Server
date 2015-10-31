@@ -17,6 +17,10 @@ public class User {
         userArrayList = new ArrayList<User>;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getName() {
         return username;
     }
@@ -41,7 +45,9 @@ public class User {
 
     public void USER_LOGIN(String username, String password) {
         for (int i = 0; i < userArrayList.size(); i++) {
-            
+            if (userArrayList.get(i).getName().equals(username) && userArrayList.get(i).getPassword().equals(password)) {
+                
+            }
         }
     }
 
