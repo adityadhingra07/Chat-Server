@@ -3,11 +3,11 @@
  */
 public class SessionCookie {
 
-    private int cookieID;
+    private long cookieID;
     public static int timeoutLength;
-
+    
     public SessionCookie(long id) {
-        
+
     }
 
     public boolean hasTimedOut() {
