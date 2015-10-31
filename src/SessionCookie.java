@@ -4,10 +4,10 @@
 public class SessionCookie {
 
     private long cookieID;
-    public static int timeoutLength;
-    
-    public SessionCookie(long id) {
+    public static int timeoutLength = 300;
 
+    public SessionCookie(long cookieID) {
+        this.cookieID = cookieID;
     }
 
     public boolean hasTimedOut() {
@@ -19,7 +19,7 @@ public class SessionCookie {
     }
 
     public long getID() {
-
+        return cookieID;
     }
 
 }
