@@ -1,3 +1,5 @@
+import com.sun.deploy.util.StringUtils;
+
 import java.util.*;
 
 /**
@@ -104,4 +106,26 @@ public class ChatServer {
 
         return request;
     }
+
+    //Protocol methods
+    public String postMessage(String[] args, String name) {
+        for (int i = 0; i < args.length ; i++) {
+            args[i] = StringUtils.trimWhitespace(args[i]);
+            if (args[i].length() <= 0) {
+                return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
+            }
+            return String.format("%s:\t%s",name,args[i]);
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+    //Protocol methods end
+
+
 }
