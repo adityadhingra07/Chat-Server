@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5aece0db-fc6d-41b8-9925-8f68b4384a33" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChatServer.java" afterPath="$PROJECT_DIR$/src/ChatServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CircularBuffer.java" afterPath="$PROJECT_DIR$/src/CircularBuffer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LaunchServer.java" afterPath="$PROJECT_DIR$/src/LaunchServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MessageFactory.java" afterPath="$PROJECT_DIR$/src/MessageFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SessionCookie.java" afterPath="$PROJECT_DIR$/src/SessionCookie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/User.java" afterPath="$PROJECT_DIR$/src/User.java" />
     </list>
     <ignored path="Chat-Server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,27 +24,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ChatServer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ChatServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27348065">
-              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SessionCookie.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SessionCookie.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SessionCookie.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.39779004">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#302#303#0" expanded="true" />
-                <element signature="e#330#331#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,11 +104,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/ChatServer.java" />
-        <option value="$PROJECT_DIR$/src/SessionCookie.java" />
         <option value="$PROJECT_DIR$/src/CircularBuffer.java" />
         <option value="$PROJECT_DIR$/src/User.java" />
         <option value="$PROJECT_DIR$/src/LaunchServer.java" />
         <option value="$PROJECT_DIR$/src/MessageFactory.java" />
+        <option value="$PROJECT_DIR$/src/SessionCookie.java" />
       </list>
     </option>
   </component>
@@ -725,18 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SessionCookie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#330#331#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MessageFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -767,10 +736,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27348065">
+        <state vertical-scroll-proportion="-1.7651933">
           <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SessionCookie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39779004">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

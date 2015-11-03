@@ -12,9 +12,20 @@ public class SessionCookie {
     }
 
     public boolean hasTimedOut() {
+        long timeElapsed = getUpdatedTimeOfActivity() * 1000;
+        if (timeElapsed == timeoutLength) {
+            return true;
+        }
+
         return false;
     }
 
+    public long getUpdatedTimeOfActivity() {
+        long oldTime = System.currentTimeMillis();
+        long newTime = System.currentTimeMillis();
+        long updatedTime = newTime - oldTime;
+        return updatedTime;
+    }
     public void updateTimeOfActivity() {
         long oldTime = System.currentTimeMillis();
         long newTime = System.currentTimeMillis();
