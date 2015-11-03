@@ -16,7 +16,9 @@ public class SessionCookie {
     }
 
     public void updateTimeOfActivity() {
-
+        long oldTime = System.currentTimeMillis();
+        long newTime = System.currentTimeMillis();
+        long updatedTime = newTime - oldTime;
     }
 
     public long getID() {
