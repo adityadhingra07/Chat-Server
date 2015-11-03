@@ -1,3 +1,6 @@
+/**
+ * Aditya Dhingra & Abid Kaisani
+ */
 import java.util.ArrayList;
 
 public class User {

@@ -1,4 +1,6 @@
-
+/**
+ * Aditya Dhingra & Abid Kaisani
+ */
 public class LaunchServer {
 
 	/**

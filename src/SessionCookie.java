@@ -1,5 +1,5 @@
 /**
- * Created by Aditya on 10/30/15.
+ * Created by Aditya Dhingra & Abid Kaisani on 10/30/15.
  */
 import java.util.*;
 public class SessionCookie {
