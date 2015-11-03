@@ -1,6 +1,7 @@
 /**
  * Created by Aditya on 10/30/15.
  */
+import java.util.*;
 public class SessionCookie {
 
     private long cookieID;
@@ -19,6 +20,14 @@ public class SessionCookie {
     }
 
     public long getID() {
+        Random randomifier = new Random();
+        int num1 = randomifier.nextInt(9);
+        int num2 = randomifier.nextInt(9);
+        int num3 = randomifier.nextInt(9);
+        int num4 = randomifier.nextInt(9);
+        String FourCode = "" + num1 + num2 + num3 + num4;
+        int ID = Integer.parseInt(FourCode);
+        cookieID =ID;
         return cookieID;
     }
 
