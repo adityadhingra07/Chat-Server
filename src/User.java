@@ -42,8 +42,11 @@ public class User {
     public void setCookie(SessionCookie cookie) {
         this.cookie = cookie;
     }
+    //WORK FROM HERE WHEN YOU GET THE TIME
     public void ADD_USER(int cookieID, String username, String password) {
         //  User userNew = new User(password, username, cookieID);
+        //ASK GREGGORY ABOUT THIS METHOD
+
     }
 
     public void USER_LOGIN(String username, String password) {
