@@ -14,7 +14,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.cookie = cookie;
-        userArrayList = new ArrayList<User>;
+        userArrayList = new ArrayList<User>();
     }
 
     public String getPassword() {

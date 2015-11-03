@@ -19,5 +19,7 @@ public class CircularBuffer {
         message = FourCode + ") " + message;
     }
 
+    //GET NEWEST METHOD LEFT
+
 
 }

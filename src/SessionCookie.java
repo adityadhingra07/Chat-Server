@@ -11,7 +11,7 @@ public class SessionCookie {
     }
 
     public boolean hasTimedOut() {
-
+        return false;
     }
 
     public void updateTimeOfActivity() {
