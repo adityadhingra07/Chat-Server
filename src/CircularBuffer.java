@@ -19,7 +19,14 @@ public class CircularBuffer {
         message = FourCode + ") " + message;
     }
 
-    //GET NEWEST METHOD LEFT
-
+    //ADDING GET NEWEST METHOD
+    public String[] getNewest(int numMessages) {
+        if (numMessages < 0) {
+            return null;
+        }
+        if (numMessages == 0) {
+        }
+        return null; // remove this later on.
+    }
 
 }
