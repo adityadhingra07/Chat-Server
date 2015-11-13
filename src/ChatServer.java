@@ -95,7 +95,7 @@ public class ChatServer {
      * @param request - the full line of the client request (CRLF included)
      * @return the server response
      */
-    public String parseRequest(String request) {
+    public static String parseRequest(String request) {
         // TODO: Replace the following code with the actual code
         
         char[] strChar = request.toCharArray();
@@ -107,6 +107,10 @@ public class ChatServer {
             compiledString = compiledString + stringTemp[i] + " ";
         }
         request = compiledString;
+        String[] checkerarg = compiledString.split(" ");
+        if (checkerarg.length != 3 ) {
+            return "error message for incorrect number of arguments";
+        }
 
 
         return request;
@@ -125,32 +129,21 @@ public class ChatServer {
     }
 
 
-    public void ADD_USER(int cookieID, String username, String password) {
-        User userNew = new User(username, password, new SessionCookie((long) cookieID));
-        //ASK GREGGORY ABOUT THIS METHOD
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] == null)
-                users[i] = userNew;
-            else {
-                continue;
-            }
-        }
-    }
+//    public void AD(int cookieID, String username, String password) {
+//        User userNew = new User(username, password, new SessionCookie((long) cookieID));
+//        //ASK GREGGORY ABOUT THIS METHOD
+//        for (int i = 0; i < users.length; i++) {
+//            if (users[i] == null)
+//                users[i] = userNew;
+//            else {
+//                continue;
+//            }
+//        }
+//    }
 
-    public void USER_LOGIN(String username, String password) {
-        for (int i = 0; i < users.length; i++) {
-            if (users[i].getName().equals(username) && users[i].getPassword().equals(password)) {
+    public static void main (String[] args) {
 
-            }
-        }
-    }
-
-    public void POST_MESSAGE(int cookieID, String message) {
-
-    }
-
-    public void GET_MESSAGES(int CookieID, int numMessages) {
-
+        System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
     }
 
 
