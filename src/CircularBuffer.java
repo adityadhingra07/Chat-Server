@@ -3,28 +3,32 @@
  */
 import java.util.*;
 public class CircularBuffer {
-    private static int size;
-    private static int messagecount;
-    private static ArrayList<String> chatroom = new ArrayList<>();
-    private static ArrayList<Long> chatcount = new ArrayList<>();
+    private int size;
+    private int messagecount;
+    public static ArrayList<String> chatroom = new ArrayList<>();
+    private static ArrayList<Integer> chatcount = new ArrayList<>();
 
     public CircularBuffer(int size) {
         this.size = size;
         this.messagecount = 0;
     }
 
-    public static void put(String message) {
+    public void put(String message) {
 
         String FourCode = String.format("%04d", messagecount);
         message = FourCode + ") " + message;
         System.out.println(message);
-        if (chatroom.size() <= size) {
+        if (chatroom.size() < size) {
             chatroom.add(message);
-            chatroom.add(messagecount);
-            messagecount ++;
+            chatcount.add(messagecount);
+            messagecount++;
         } else {
-            for (int i = 0; i < chatroom.size() ; i++) {
-                
+            for (int i = 0; i < chatroom.size() - 1 ; i++) {
+                if (chatcount.get(i) > chatcount.get(i+1)) {
+                    chatroom.set(i+1 , message);
+                    chatcount.set(i+1, messagecount);
+                    messagecount++;
+                }
             }
         }
     }
@@ -40,7 +44,14 @@ public class CircularBuffer {
     }
 
     public static void main(String[] args) {
-        put("HI MY NAME");
+        CircularBuffer cb = new CircularBuffer(4);
+        cb.put("Hi");
+        cb.put("1");
+        cb.put("2");
+        cb.put("3");
+        cb.put("4");
+        System.out.println(cb.chatroom.toString());
+
     }
 
 }
