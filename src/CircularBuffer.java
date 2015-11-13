@@ -3,20 +3,30 @@
  */
 import java.util.*;
 public class CircularBuffer {
-    private int size;
+    private static int size;
+    private static int messagecount;
+    private static ArrayList<String> chatroom = new ArrayList<>();
+    private static ArrayList<Long> chatcount = new ArrayList<>();
+
     public CircularBuffer(int size) {
         this.size = size;
+        this.messagecount = 0;
     }
 
-    public void put(String message) {
-        Random randomifier = new Random();
+    public static void put(String message) {
 
-        int num1 = randomifier.nextInt(9);
-        int num2 = randomifier.nextInt(9);
-        int num3 = randomifier.nextInt(9);
-        int num4 = randomifier.nextInt(9);
-        String FourCode = "" + num1 + num2 + num3 + num4;
+        String FourCode = String.format("%04d", messagecount);
         message = FourCode + ") " + message;
+        System.out.println(message);
+        if (chatroom.size() <= size) {
+            chatroom.add(message);
+            chatroom.add(messagecount);
+            messagecount ++;
+        } else {
+            for (int i = 0; i < chatroom.size() ; i++) {
+                
+            }
+        }
     }
 
     //ADDING GET NEWEST METHOD
@@ -27,6 +37,10 @@ public class CircularBuffer {
         if (numMessages == 0) {
         }
         return null; // remove this later on.
+    }
+
+    public static void main(String[] args) {
+        put("HI MY NAME");
     }
 
 }
