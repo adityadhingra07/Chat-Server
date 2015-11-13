@@ -10,14 +10,13 @@ public class User {
     private String username;
     private String password;
     private SessionCookie cookie;
-    ArrayList<User> userArrayList;
 
 
     public User(String username, String password, SessionCookie cookie) {
         this.username = username;
         this.password = password;
         this.cookie = cookie;
-        userArrayList = new ArrayList<User>();
+
     }
 
     public String getPassword() {
@@ -40,29 +39,8 @@ public class User {
     }
 
     public void setCookie(SessionCookie cookie) {
+
         this.cookie = cookie;
-    }
-    //WORK FROM HERE WHEN YOU GET THE TIME
-    public void ADD_USER(int cookieID, String username, String password) {
-        //  User userNew = new User(password, username, cookieID);
-        //ASK GREGGORY ABOUT THIS METHOD
-
-    }
-
-    public void USER_LOGIN(String username, String password) {
-        for (int i = 0; i < userArrayList.size(); i++) {
-            if (userArrayList.get(i).getName().equals(username) && userArrayList.get(i).getPassword().equals(password)) {
-
-            }
-        }
-    }
-
-    public void POST_MESSAGE(int cookieID, String message) {
-
-    }
-
-    public void GET_MESSAGES(int CookieID, int numMessages) {
-
     }
 
 }

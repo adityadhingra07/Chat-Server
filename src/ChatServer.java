@@ -14,9 +14,13 @@ import java.util.*;
  * @lab (Your Lab Section)
  */
 public class ChatServer {
-
+    private User[] users;
+    private int maxMessages;
+    int count = 0;
     public ChatServer(User[] users, int maxMessages) {
         // TODO Complete the constructor
+        this.users = users;
+
     }
 
     /**
@@ -93,13 +97,14 @@ public class ChatServer {
      */
     public String parseRequest(String request) {
         // TODO: Replace the following code with the actual code
+        
         char[] strChar = request.toCharArray();
         strChar = Arrays.copyOf(strChar, strChar.length - 2);
         request = new String(strChar);
         String[] stringTemp = request.split("\t");
         String compiledString = "";
         for (int i = 0; i < stringTemp.length; i++) {
-            compiledString = compiledString + stringTemp[i];
+            compiledString = compiledString + stringTemp[i] + " ";
         }
         request = compiledString;
 
@@ -117,6 +122,35 @@ public class ChatServer {
             return String.format("%s:\t%s",name,args[i]);
         }
         return null;
+    }
+
+
+    public void ADD_USER(int cookieID, String username, String password) {
+        User userNew = new User(username, password, new SessionCookie((long) cookieID));
+        //ASK GREGGORY ABOUT THIS METHOD
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null)
+                users[i] = userNew;
+            else {
+                continue;
+            }
+        }
+    }
+
+    public void USER_LOGIN(String username, String password) {
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].getName().equals(username) && users[i].getPassword().equals(password)) {
+
+            }
+        }
+    }
+
+    public void POST_MESSAGE(int cookieID, String message) {
+
+    }
+
+    public void GET_MESSAGES(int CookieID, int numMessages) {
+
     }
 
 
