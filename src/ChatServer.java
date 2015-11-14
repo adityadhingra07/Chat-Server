@@ -14,6 +14,7 @@ import java.util.stream.Collector;
  * @version (Today's Date)
  * @lab (Your Lab Section)
  */
+
 public class ChatServer {
     private User[] users;
     private int maxMessages;
@@ -22,10 +23,12 @@ public class ChatServer {
     String command;
     String uname;
     String upass;
-    String cookit;
+    CircularBuffer cb;
 
     public ChatServer(User[] users, int maxMessages) {
         // TODO Complete the constructor
+        this.maxMessages = maxMessages;
+        cb = new CircularBuffer(maxMessages);
         this.users = users;
         Random randomifier = new Random();
         int num1 = randomifier.nextInt(10000);
@@ -139,10 +142,10 @@ public class ChatServer {
             for (int i = 0; i < users.length; i++) {
                 if (command.toUpperCase().equals(users[i].getName())) {
                     if (users[i].getCookie() == null) {
-                        return "failure:LUser not autheticated message";
+                        return "Failure:User not authenticated message";
                     } else if (users[i].getCookie().hasTimedOut()) {
                         users[i].setCookie(null);
-                        return "daliuere:Cookie timeout message";
+                        return "Failure:Cookie timeout message";
                     } else {
                         continue;
                     }
@@ -255,11 +258,11 @@ public class ChatServer {
                             return String.format("SUCCESS\t%04D\r\n", cookieID);
                         }
 
-                        return "failure: incorrect password";
+                        return "Failure: incorrect password";
                     }
-                    return "Faliure: User already signed in";
+                    return "Failure: User already signed in";
                 }
-                return "Failure: user dies not exsist";
+                return "Failure: user dies not exist";
 
             }
 
@@ -281,8 +284,9 @@ public class ChatServer {
         if (noSpaceMessage.length() < 1)
             return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
 
-
-        return String.format("%s: %s",name,message);
+        String msg = String.format("%s: %s", name, message);
+        cb.put(msg);
+        return msg;
     }
 
 
