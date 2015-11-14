@@ -1,5 +1,6 @@
 import com.sun.deploy.util.StringUtils;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collector;
 
@@ -312,9 +313,9 @@ public class ChatServer {
 
     public String getMessages(String[] args) {
         int numMessages = Integer.parseInt(args[2]);
-        if (numMessages < 1)
+        if (numMessages < 0)
             return "Failure:\t24\tINVALID_VALUE_ERROR ";
-        return null;
+        String msg = Arrays.toString(cb.getNewest(numMessages));
     }
 
 
