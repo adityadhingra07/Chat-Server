@@ -5,7 +5,7 @@ import java.util.*;
 public class CircularBuffer {
     private int size;
     private int messagecount;
-    public static ArrayList<String> chatroom = new ArrayList<>();
+    private static ArrayList<String> chatroom = new ArrayList<>();
     private static ArrayList<Integer> chatcount = new ArrayList<>();
 
     public CircularBuffer(int size) {
@@ -23,11 +23,17 @@ public class CircularBuffer {
             chatcount.add(messagecount);
             messagecount++;
         } else {
-            for (int i = 0; i < chatroom.size() - 1 ; i++) {
+            for (int i = 0; i < chatcount.size() - 1 ; i++) {
                 if (chatcount.get(i) > chatcount.get(i+1)) {
                     chatroom.set(i+1 , message);
                     chatcount.set(i+1, messagecount);
                     messagecount++;
+                    break;
+                } else if (messagecount != chatcount.get(i) - 1) {
+                    chatroom.set(i , message);
+                    chatcount.set(i, messagecount);
+                    messagecount++;
+                    break;
                 }
             }
         }
@@ -52,6 +58,7 @@ public class CircularBuffer {
         cb.put("4");
         cb.put("5");
         cb.put("6");
+        System.out.println(cb.chatcount.toString());
         System.out.println(cb.chatroom.toString());
 
     }
