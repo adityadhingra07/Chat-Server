@@ -179,7 +179,13 @@ public class ChatServer {
     }
 
     public String addUser(String[] args) {
-        return null;
+        User userNew = new User(args[2],args[3],new SessionCookie(Long.parseLong(args[1])));
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null)
+                users[i] = userNew;
+            return "SUCCESS\r\n";
+        }
+        return "Failure: no add user";
     }
 
     public String userLogin(String[] args) {
