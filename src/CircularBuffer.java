@@ -50,6 +50,8 @@ public class CircularBuffer {
         cb.put("2");
         cb.put("3");
         cb.put("4");
+        cb.put("5");
+        cb.put("6");
         System.out.println(cb.chatroom.toString());
 
     }
