@@ -1,6 +1,7 @@
 /**
  * Created by Aditya Dhingra & Abid Kaisani on 10/30/15.
  */
+import java.lang.reflect.Array;
 import java.util.*;
 public class CircularBuffer {
     private int size;
@@ -39,14 +40,69 @@ public class CircularBuffer {
         }
     }
 
-    //ADDING GET NEWEST METHOD
     public String[] getNewest(int numMessages) {
+        // Invalid Number
         if (numMessages < 0) {
             return null;
         }
+        // No messages
         if (numMessages == 0) {
+            String[] s = {};
+            return s;
         }
-        return null; // remove this later on.
+        //ELSE DO THIS
+        String[] tempChatroom = new String[chatroom.size()];
+        for (int i = 0; i < chatroom.size(); i++) {
+            tempChatroom[i] = chatroom.get(i);
+        }
+        int[] tempChatcount = new int[chatcount.size()];
+        for (int i = 0; i < chatcount.size(); i++) {
+            tempChatcount[i] = chatcount.get(i);
+        }
+        String tempMsg = "";
+        int temp = 0;
+        int numAvailable;
+        if (messagecount < chatroom.size()) {
+            numAvailable = messagecount;
+        } else {
+            numAvailable = size;
+        }
+        if (numAvailable < numMessages) {
+            for (int i = 0; i < tempChatcount.length; i++) {
+                for (int j = 0; j < tempChatcount.length; j++) {
+                    if(tempChatcount[i] < tempChatcount[j]) {
+                        temp = tempChatcount[i];
+                        tempMsg = tempChatroom[i];
+                        tempChatcount[i] = tempChatcount[j];
+                        tempChatroom[i] = tempChatroom[j];
+                        tempChatcount[j] = temp;
+                        tempChatroom[j] = tempMsg;
+                    }
+                }
+            }
+            return tempChatroom;
+        }
+        // IF NOTHING ABOVE WORKS, THEN DO THIS
+        for (int i = 0; i < tempChatcount.length; i++) {
+            for (int j = 0; j < tempChatcount.length; j++) {
+                if(tempChatcount[i] < tempChatcount[j]) {
+                    temp = tempChatcount[i];
+                    tempMsg = tempChatroom[i];
+                    tempChatcount[i] = tempChatcount[j];
+                    tempChatroom[i] = tempChatroom[j];
+                    tempChatcount[j] = temp;
+                    tempChatroom[j] = tempMsg;
+                }
+            }
+        }
+        String[] FinalArray = new String[numMessages];
+        int ind = 0;
+        for (int j = tempChatroom.length - numMessages; j < tempChatroom.length; j++) {
+            FinalArray[ind] = tempChatroom[j];
+            ind++;
+        }
+
+        return FinalArray;
     }
 
     public static void main(String[] args) {
@@ -63,6 +119,7 @@ public class CircularBuffer {
         cb.put("9");
         System.out.println(cb.chatcount.toString());
         System.out.println(cb.chatroom.toString());
+        System.out.println(Arrays.toString(cb.getNewest(3)));
 
     }
 
