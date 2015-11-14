@@ -27,13 +27,14 @@ public class ChatServer {
         // TODO Complete the constructor
         this.users = users;
         Random randomifier = new Random();
-        int num1 = randomifier.nextInt(9);
-        int num2 = randomifier.nextInt(9);
-        int num3 = randomifier.nextInt(9);
-        int num4 = randomifier.nextInt(9);
-        String FourCode = "" + num1 + num2 + num3 + num4;
+        int num1 = randomifier.nextInt(10000);
+        //                    int num2 = randomifier.nextInt(9);
+        //                    int num3 = randomifier.nextInt(9);
+        //                    int num4 = randomifier.nextInt(9);
+        String FourCode = String.format("%04d", num1);
         int ID = Integer.parseInt(FourCode);
         cookieID = ID;
+        System.out.println(cookieID);
         users[0] = new User("root", "cs180", new SessionCookie(cookieID));
     }
 
@@ -125,7 +126,7 @@ public class ChatServer {
 
         if (checkerarg.length != 3 && checkerarg.length == 4) {
 
-        } else if (checkerarg.length !=3){
+        } else if (checkerarg.length != 3) {
             return "failure:error message for incorrect number of arguments";
         }
         command = checkerarg[0];
@@ -153,7 +154,7 @@ public class ChatServer {
             if (command.equals("USER-LOGIN"))
                 return userLogin(checkerarg);
             if (command.equals("POST-MESSAGE"))
-                return postMessage(checkerarg,checkerarg[2]);
+                return postMessage(checkerarg, checkerarg[2]);
             if (command.equals("GET-MESSAGES"))
                 return getMessages(checkerarg);
 
@@ -161,7 +162,7 @@ public class ChatServer {
         }
 
 
-        return "unknown";
+        return "unknown:parse request";
     }
 
     //Protocol methods
@@ -179,7 +180,7 @@ public class ChatServer {
     }
 
     public String addUser(String[] args) {
-        User userNew = new User(args[2],args[3],new SessionCookie(Long.parseLong(args[1])));
+        User userNew = new User(args[2], args[3], new SessionCookie(Long.parseLong(args[1])));
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null)
                 users[i] = userNew;
@@ -189,7 +190,42 @@ public class ChatServer {
     }
 
     public String userLogin(String[] args) {
-        return  null;
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].getName().equals(args[1])) {
+                if (users[i].getCookie() == null) {
+                    if (users[i].getPassword().equals(args[2])) {
+                        Random randomifier = new Random();
+                        int num1 = randomifier.nextInt(10000);
+//                    int num2 = randomifier.nextInt(9);
+//                    int num3 = randomifier.nextInt(9);
+//                    int num4 = randomifier.nextInt(9);
+                        String FourCode = String.format("%04d", num1);
+                        int ID = Integer.parseInt(FourCode);
+                        cookieID = ID;
+                        boolean cookieUnique = false;
+                        while (cookieUnique != true) {
+                            for (int j = 0; j < users.length; j++) {
+                                if (users[j].getCookie().getID() == cookieID)
+                                    cookieUnique = false;
+                                else
+                                    cookieUnique = true;
+                            }
+                        }
+                        if (cookieUnique == true) {
+                            users[i].setCookie(new SessionCookie((long) cookieID));
+                            return String.format("SUCCESS\t%04D\r\n",cookieID);
+                        }
+
+                        return "failure: incorrect password";
+                    }
+                    return "Faliure: User already signed in";
+                }
+                return "Failure: user dies not exsist";
+
+            }
+
+        }
+        return "unknown login";
     }
 
 
