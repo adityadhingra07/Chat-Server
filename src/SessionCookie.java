@@ -21,7 +21,8 @@ public class SessionCookie {
 
     public SessionCookie(long cookieID) {
         this.cookieID = cookieID;
-        this.oldTime = System.currentTimeMillis();
+        //this.oldTime = System.currentTimeMillis();
+        this.time = System.currentTimeMillis();
         this.timeoutLength = 300;
     }
 
