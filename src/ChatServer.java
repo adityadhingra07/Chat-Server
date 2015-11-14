@@ -30,7 +30,7 @@ public class ChatServer {
         Random randomifier = new Random();
         int num1 = randomifier.nextInt(10000);
         //                    int num2 = randomifier.nextInt(9);
-        //                    int num3 = randomifier.nextInt(9);
+        //                  return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";  int num3 = randomifier.nextInt(9);
         //                    int num4 = randomifier.nextInt(9);
         String FourCode = String.format("%04d", num1);
         int ID = Integer.parseInt(FourCode);
@@ -289,6 +289,9 @@ public class ChatServer {
 
 
     public String getMessages(String[] args) {
+        int numMessages = Integer.parseInt(args[2]);
+        if (numMessages < 1)
+            return "Failure:\t24\tINVALID_VALUE_ERROR ";
         return null;
     }
 
