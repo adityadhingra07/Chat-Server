@@ -17,8 +17,8 @@ import java.util.*;
 public class CircularBuffer {
     private int size;
     private int messagecount;
-    private static ArrayList<String> chatroom = new ArrayList<>();
-    private static ArrayList<Integer> chatcount = new ArrayList<>();
+    private ArrayList<String> chatroom = new ArrayList<>();
+    private ArrayList<Integer> chatcount = new ArrayList<>();
 
     public CircularBuffer(int size) {
         this.size = size;
@@ -116,22 +116,22 @@ public class CircularBuffer {
         return FinalArray;
     }
 
-    public static void main(String[] args) {
-        CircularBuffer cb = new CircularBuffer(4);
-        cb.put("0");
-        cb.put("1");
-        cb.put("2");
-        cb.put("3");
-        cb.put("4");
-        cb.put("5");
-        cb.put("6");
-        cb.put("7");
-        cb.put("8");
-        cb.put("9");
-        System.out.println(cb.chatcount.toString());
-        System.out.println(cb.chatroom.toString());
-        System.out.println(Arrays.toString(cb.getNewest(3)));
-
-    }
+//    public static void main(String[] args) {
+//        CircularBuffer cb = new CircularBuffer(4);
+//        cb.put("0");
+//        cb.put("1");
+//        cb.put("2");
+//        cb.put("3");
+//        cb.put("4");
+//        cb.put("5");
+//        cb.put("6");
+//        cb.put("7");
+//        cb.put("8");
+//        cb.put("9");
+//        System.out.println(cb.chatcount.toString());
+//        System.out.println(cb.chatroom.toString());
+//        System.out.println(Arrays.toString(cb.getNewest(3)));
+//
+//    }
 
 }
