@@ -315,23 +315,33 @@ public class ChatServer {
         int numMessages = Integer.parseInt(args[2]);
         if (numMessages < 0)
             return "Failure:\t24\tINVALID_VALUE_ERROR ";
-        String msg = Arrays.toString(cb.getNewest(numMessages));
-        msg = msg.substring(1,msg.length() -1);
-        String[] messages = msg.split(",");
-        for (int i = 0; i < messages.length; i++) {
-            String start = messages[i].substring(0,messages[i].length() -2);
-            String mid = "";
-            String end = messages[i].substring(messages[i].length() -1,messages.length);
-            for (int j = 0; j < users.length; j++) {
-                if (users[i].getCookie().getID()== Integer.parseInt(start.substring(0,messages[i].length() -1)));
-                    mid = users[i].getName();
-
+        String[] msg = cb.getNewest(numMessages);
+        String finalmsg = "SUCCESS\\t";
+        for (int i = 0; i < msg.length; i++) {
+            if (i == msg.length - 1) {
+                finalmsg += msg[i] +  "\r\n";
+            } else {
+                finalmsg += msg[i] + "\t";
             }
-            messages[i] = "" + start + mid + end;
         }
-        String temp = Arrays.toString(messages);
-        String output = temp.replaceAll(",","\t");
-        return String.format("SUCCESS\t%s",output);
+        return finalmsg;
+//        msg = msg.substring(1,msg.length() -1);
+//        String[] messages = msg.split(",");
+//        for (int i = 0; i < messages.length; i++) {
+//            String start = messages[i].substring(0,messages[i].length() -2);
+//            String mid = "";
+//            String end = messages[i].substring(messages[i].length() -1,messages.length);
+//            for (int j = 0; j < users.length; j++) {
+//                if (users[i].getCookie().getID()== Integer.parseInt(start.substring(0,messages[i].length() -1)));
+//                    mid = users[i].getName();
+//
+//            }
+//            messages[i] = "" + start + mid + end;
+//        }
+//        String temp = Arrays.toString(messages);
+//        String output = temp.replaceAll(",","\t");
+//        return String.format("SUCCESS\t%s",output);
+
 
 
     }
@@ -352,6 +362,7 @@ public class ChatServer {
     public static void main(String[] args) {
 
         //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
+        //
     }
 
 
