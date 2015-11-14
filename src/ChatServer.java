@@ -177,7 +177,8 @@ public class ChatServer {
         return "unknown:parse request";
     }
 
-    //Protocol methods
+    //PROTOCOL METHODS : START HERE
+
     public String addUser(String[] args) {
         String cookie = args[0];
         String uname = args[1];
@@ -318,14 +319,6 @@ public class ChatServer {
     }
 
     public String postMessage(String[] args, String name) {
-//        for (int i = 0; i < args.length; i++) {
-//            args[i] = StringUtils.trimWhitespace(args[i]);
-//            if (args[i].length() <= 0) {
-//                return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
-//            }
-//
-//            return String.format("%s:\t%s", name, args[i]);
-//        }
         String message = args[1];
 //        String noSpaceMessage = StringUtils.trimWhitespace(message);
         String noSpaceMessage = message.trim();
@@ -336,9 +329,9 @@ public class ChatServer {
         cb.put(msg);
         return msg;
     }
-    
+
     public String getMessages(String[] args) {
-        int numMessages = Integer.parseInt(args[0]);
+        int numMessages = Integer.parseInt(args[1]);
         if (numMessages < 0)
             return "Failure:\t24\tINVALID_VALUE_ERROR ";
         String[] msg = cb.getNewest(numMessages);
@@ -352,6 +345,9 @@ public class ChatServer {
         }
         return finalmsg;
     }
+
+    //PROTOCOL METHODS: END HERE
+
 //        msg = msg.substring(1,msg.length() -1);
 //        String[] messages = msg.split(",");
 //        for (int i = 0; i < messages.length; i++) {
@@ -376,9 +372,5 @@ public class ChatServer {
         //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
         ChatServer c = new ChatServer(new User[0], 200);
     }
-
-
-    //Protocol methods end
-
 
 }
