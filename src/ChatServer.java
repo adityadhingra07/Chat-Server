@@ -1,6 +1,7 @@
 import com.sun.deploy.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collector;
 
 /**
  * <b> CS 180 - Project 4 - Chat Server Skeleton </b>
@@ -180,6 +181,49 @@ public class ChatServer {
     }
 
     public String addUser(String[] args) {
+        boolean checkAlphabet = true;
+        boolean checkNumba = true;
+        String viableCheckString = "" + args[2] + " " + args[3];
+        String[] viableArray = viableCheckString.split(" ");
+        char[] uname = viableArray[0].toCharArray();
+        char[] pass = viableArray[1].toCharArray();
+        if ( (uname.length < 1 && uname.length > 20))
+            return "Failure: incorrect length of username";
+        if ((pass.length < 4 && pass.length > 40 ) )
+            return "Failure: incorrect length of password";
+
+        while (checkAlphabet == true ) {
+            for (int j = 0; j < uname.length; j++) {
+                if (!(Character.isLetter(uname[j]))) {
+                    checkAlphabet = false;
+
+                }
+            }
+
+            for (int j = 0; j < pass.length; j++) {
+                if (!(Character.isLetter(pass[j]))) {
+                    checkAlphabet = false;
+                }
+            }
+        }
+        while (checkNumba == true ) {
+            for (int j = 0; j < uname.length; j++) {
+                if ((!(Character.isLetter(uname[j]))) && !(Character.isLetter(uname[j]))) {
+                    checkNumba = false;
+
+                }
+            }
+
+            for (int j = 0; j < pass.length; j++) {
+                if ((!(Character.isLetter(pass[j]))) && !(Character.isLetter(pass[j]))) {
+                    checkNumba = false;
+                }
+            }
+        }
+        if (checkNumba == false || checkAlphabet == false)
+            return "Failure: Username can ony contain the following [A-Za-z0-9]";
+
+
         User userNew = new User(args[2], args[3], new SessionCookie(Long.parseLong(args[1])));
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null)
@@ -213,7 +257,7 @@ public class ChatServer {
                         }
                         if (cookieUnique == true) {
                             users[i].setCookie(new SessionCookie((long) cookieID));
-                            return String.format("SUCCESS\t%04D\r\n",cookieID);
+                            return String.format("SUCCESS\t%04D\r\n", cookieID);
                         }
 
                         return "failure: incorrect password";
