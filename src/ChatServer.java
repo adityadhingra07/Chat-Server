@@ -25,7 +25,9 @@ public class ChatServer {
     String upass;
     CircularBuffer cb;
 
+
     public ChatServer(User[] users, int maxMessages) {
+
         // TODO Complete the constructor
         this.maxMessages = maxMessages;
         cb = new CircularBuffer(maxMessages);
@@ -189,36 +191,52 @@ public class ChatServer {
             return "Failure: incorrect length of username";
         if ((pass.length < 4 && pass.length > 40))
             return "Failure: incorrect length of password";
-
-        while (checkAlphabet == true) {
+        while (checkAlphabet == false) {
             for (int j = 0; j < uname.length; j++) {
-                if (!(Character.isLetter(uname[j]))) {
+                if (!(Character.isLetterOrDigit(uname[j]))) {
                     checkAlphabet = false;
 
                 }
             }
 
             for (int j = 0; j < pass.length; j++) {
-                if (!(Character.isLetter(pass[j]))) {
+                if (!(Character.isLetterOrDigit(pass[j]))) {
                     checkAlphabet = false;
                 }
             }
         }
-        while (checkNumba == true) {
-            for (int j = 0; j < uname.length; j++) {
-                if ((!(Character.isLetter(uname[j]))) && !(Character.isLetter(uname[j]))) {
-                    checkNumba = false;
 
-                }
-            }
 
-            for (int j = 0; j < pass.length; j++) {
-                if ((!(Character.isLetter(pass[j]))) && !(Character.isLetter(pass[j]))) {
-                    checkNumba = false;
-                }
-            }
-        }
-        if (checkNumba == false || checkAlphabet == false)
+
+//        while (checkAlphabet == true) {
+//            for (int j = 0; j < uname.length; j++) {
+//                if (!(Character.isLetter(uname[j]))) {
+//                    checkAlphabet = false;
+//
+//                }
+//            }
+//
+//            for (int j = 0; j < pass.length; j++) {
+//                if (!(Character.isLetter(pass[j]))) {
+//                    checkAlphabet = false;
+//                }
+//            }
+//        }
+//        while (checkNumba == true) {
+//            for (int j = 0; j < uname.length; j++) {
+//                if ((!(Character.isLetter(uname[j]))) && !(Character.isLetter(uname[j]))) {
+//                    checkNumba = false;
+//
+//                }
+//            }
+//
+//            for (int j = 0; j < pass.length; j++) {
+//                if ((!(Character.isLetter(pass[j]))) && !(Character.isLetter(pass[j]))) {
+//                    checkNumba = false;
+//                }
+//            }
+//        }
+        if (checkAlphabet == false)
             return "Failure: Username can ony contain the following [A-Za-z0-9]";
 
 
