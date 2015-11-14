@@ -19,6 +19,7 @@ import java.util.stream.Collector;
 public class ChatServer {
     private User[] users;
     private int maxMessages;
+    SessionCookie cookie;
     int cookieID;
     String command;
     CircularBuffer cb;
@@ -37,6 +38,7 @@ public class ChatServer {
         int ID = Integer.parseInt(FourCode);
         cookieID = ID;
         System.out.println(cookieID);
+        System.out.println(FourCode);
         users[0] = new User("root", "cs180", new SessionCookie(cookieID));
     }
 
@@ -177,30 +179,60 @@ public class ChatServer {
 
     //Protocol methods
     public String addUser(String[] args) {
-        boolean checkAlphabet = true;
-        boolean checkNumba = true;
-        String viableCheckString = "" + args[2] + " " + args[3];
-        String[] viableArray = viableCheckString.split(" ");
-        char[] uname = viableArray[0].toCharArray();
-        char[] pass = viableArray[1].toCharArray();
-        if ((uname.length < 1 && uname.length > 20))
-            return "Failure: incorrect length of username";
-        if ((pass.length < 4 && pass.length > 40))
-            return "Failure: incorrect length of password";
-        while (checkAlphabet == false) {
-            for (int j = 0; j < uname.length; j++) {
-                if (!(Character.isLetterOrDigit(uname[j]))) {
-                    checkAlphabet = false;
+        String cookie = args[0];
+        String uname = args[1];
+        String pass = args[2];
 
-                }
-            }
-
-            for (int j = 0; j < pass.length; j++) {
-                if (!(Character.isLetterOrDigit(pass[j]))) {
-                    checkAlphabet = false;
-                }
+        //CHECK FOR VALIDITY OF UNAME AND PASS
+        // 1. Length Check
+        boolean check = true;
+        if (!(uname.length() >= 1 && uname.length() <= 20)) {
+            check = false;
+            return "Failure: ERROR MESSAGE #24";
+        }
+        if (!(pass.length() >= 4 && pass.length() <= 40)) {
+            check = false;
+            return "Failure: ERROR MESSAGE #24";
+        }
+        // 2. AlphaNumeric Check
+        for (int i = 0; i < uname.length(); i++) {
+            if (!(Character.isLetterOrDigit(uname.charAt(i)))) {
+                check = false;
+                return "Failure: ERROR MESSAGE #24";
             }
         }
+        for (int i = 0; i < pass.length(); i++) {
+            if (!(Character.isLetterOrDigit(pass.charAt(i)))) {
+                check = false;
+                return "Failure: ERROR MESSAGE #24";
+            }
+        }
+        //CHECKS COMPLETE : Errors have been reported.
+
+//        boolean checkAlphabet = true;
+//        boolean checkNumba = true;
+//        String viableCheckString = "" + args[2] + " " + args[3];
+//        String[] viableArray = viableCheckString.split(" ");
+//        char[] uname = viableArray[0].toCharArray();
+//        char[] pass = viableArray[1].toCharArray();
+//        if ((uname.length < 1 && uname.length > 20))
+//            return "Failure: incorrect length of username";
+//        if ((pass.length < 4 && pass.length > 40))
+//            return "Failure: incorrect length of password";
+//        while (checkAlphabet == false) {
+//            for (int j = 0; j < uname.length; j++) {
+//                if (!(Character.isLetterOrDigit(uname[j]))) {
+//                    checkAlphabet = false;
+//
+//                }
+//            }
+//
+//            for (int j = 0; j < pass.length; j++) {
+//                if (!(Character.isLetterOrDigit(pass[j]))) {
+//                    checkAlphabet = false;
+//                }
+//            }
+//        }
 
 
 
@@ -232,15 +264,16 @@ public class ChatServer {
 //                }
 //            }
 //        }
-        if (checkAlphabet == false)
-            return "Failure: Username can ony contain the following [A-Za-z0-9]";
+//        if (checkAlphabet == false)
+//            return "Failure: Username can ony contain the following [A-Za-z0-9]";
 
 
-        User userNew = new User(args[2], args[3], new SessionCookie(Long.parseLong(args[1])));
+        User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(args[0])));
         for (int i = 0; i < users.length; i++) {
-            if (users[i] == null)
+            if (users[i] == null) {
                 users[i] = userNew;
-            return "SUCCESS\r\n";
+                return "SUCCESS\r\n";
+            }
         }
         return "Failure: no add user";
     }
@@ -293,8 +326,9 @@ public class ChatServer {
 //
 //            return String.format("%s:\t%s", name, args[i]);
 //        }
-        String message = args[2];
-        String noSpaceMessage = StringUtils.trimWhitespace(message);
+        String message = args[1];
+//        String noSpaceMessage = StringUtils.trimWhitespace(message);
+        String noSpaceMessage = message.trim();
         if (noSpaceMessage.length() < 1)
             return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
 
@@ -302,10 +336,7 @@ public class ChatServer {
         cb.put(msg);
         return msg;
     }
-
-
-
-
+    
     public String getMessages(String[] args) {
         int numMessages = Integer.parseInt(args[0]);
         if (numMessages < 0)
@@ -314,12 +345,13 @@ public class ChatServer {
         String finalmsg = "SUCCESS\\t";
         for (int i = 0; i < msg.length; i++) {
             if (i == msg.length - 1) {
-                finalmsg += msg[i] +  "\r\n";
+                finalmsg += msg[i] + "\r\n";
             } else {
                 finalmsg += msg[i] + "\t";
             }
         }
         return finalmsg;
+    }
 //        msg = msg.substring(1,msg.length() -1);
 //        String[] messages = msg.split(",");
 //        for (int i = 0; i < messages.length; i++) {
@@ -339,24 +371,10 @@ public class ChatServer {
 
 
 
-    }
-
-
-//    public void AD(int cookieID, String username, String password) {
-//        User userNew = new User(username, password, new SessionCookie((long) cookieID));
-//        //ASK GREGGORY ABOUT THIS METHOD
-//        for (int i = 0; i < users.length; i++) {
-//            if (users[i] == null)
-//                users[i] = userNew;
-//            else {
-//                continue;
-//            }
-//        }
-//    }
-
     public static void main(String[] args) {
 
         //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
+        ChatServer c = new ChatServer(new User[0], 200);
     }
 
 
