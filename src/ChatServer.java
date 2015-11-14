@@ -154,8 +154,16 @@ public class ChatServer {
             }
             if (command.equals("USER-LOGIN"))
                 return userLogin(checkerarg);
-            if (command.equals("POST-MESSAGE"))
-                return postMessage(checkerarg, checkerarg[2]);
+            if (command.equals("POST-MESSAGE")) {
+                int foodId = Integer.parseInt(checkerarg[1]);
+                String name = "";
+                for (int i = 0; i < users.length; i++) {
+                    if (users[i].getCookie().getID() == foodId)
+                        name = users[i].getName();
+
+                }
+                return postMessage(checkerarg, name);
+            }
             if (command.equals("GET-MESSAGES"))
                 return getMessages(checkerarg);
 
@@ -167,19 +175,6 @@ public class ChatServer {
     }
 
     //Protocol methods
-    public String postMessage(String[] args, String name) {
-        for (int i = 0; i < args.length; i++) {
-            args[i] = StringUtils.trimWhitespace(args[i]);
-            if (args[i].length() <= 0) {
-                return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
-            }
-
-            return String.format("%s:\t%s", name, args[i]);
-        }
-
-        return null;
-    }
-
     public String addUser(String[] args) {
         boolean checkAlphabet = true;
         boolean checkNumba = true;
@@ -187,12 +182,12 @@ public class ChatServer {
         String[] viableArray = viableCheckString.split(" ");
         char[] uname = viableArray[0].toCharArray();
         char[] pass = viableArray[1].toCharArray();
-        if ( (uname.length < 1 && uname.length > 20))
+        if ((uname.length < 1 && uname.length > 20))
             return "Failure: incorrect length of username";
-        if ((pass.length < 4 && pass.length > 40 ) )
+        if ((pass.length < 4 && pass.length > 40))
             return "Failure: incorrect length of password";
 
-        while (checkAlphabet == true ) {
+        while (checkAlphabet == true) {
             for (int j = 0; j < uname.length; j++) {
                 if (!(Character.isLetter(uname[j]))) {
                     checkAlphabet = false;
@@ -206,7 +201,7 @@ public class ChatServer {
                 }
             }
         }
-        while (checkNumba == true ) {
+        while (checkNumba == true) {
             for (int j = 0; j < uname.length; j++) {
                 if ((!(Character.isLetter(uname[j]))) && !(Character.isLetter(uname[j]))) {
                     checkNumba = false;
@@ -271,6 +266,26 @@ public class ChatServer {
         }
         return "unknown login";
     }
+
+    public String postMessage(String[] args, String name) {
+//        for (int i = 0; i < args.length; i++) {
+//            args[i] = StringUtils.trimWhitespace(args[i]);
+//            if (args[i].length() <= 0) {
+//                return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
+//            }
+//
+//            return String.format("%s:\t%s", name, args[i]);
+//        }
+        String message = args[2];
+        String noSpaceMessage = StringUtils.trimWhitespace(message);
+        if (noSpaceMessage.length() < 1)
+            return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
+
+
+        return String.format("%s: %s",name,message);
+    }
+
+
 
 
     public String getMessages(String[] args) {
