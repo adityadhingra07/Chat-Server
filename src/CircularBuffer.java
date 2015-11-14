@@ -23,13 +23,13 @@ public class CircularBuffer {
             chatcount.add(messagecount);
             messagecount++;
         } else {
-            for (int i = 0; i < chatcount.size() - 1 ; i++) {
+            for (int i = 0; i < chatcount.size(); i++) {
                 if (chatcount.get(i) > chatcount.get(i+1)) {
                     chatroom.set(i+1 , message);
                     chatcount.set(i+1, messagecount);
                     messagecount++;
                     break;
-                } else if (messagecount != chatcount.get(i) - 1) {
+                } else if(messagecount - chatcount.get(size - 1) == 1) {
                     chatroom.set(i , message);
                     chatcount.set(i, messagecount);
                     messagecount++;
@@ -51,13 +51,16 @@ public class CircularBuffer {
 
     public static void main(String[] args) {
         CircularBuffer cb = new CircularBuffer(4);
-        cb.put("Hi");
+        cb.put("0");
         cb.put("1");
         cb.put("2");
         cb.put("3");
         cb.put("4");
         cb.put("5");
         cb.put("6");
+        cb.put("7");
+        cb.put("8");
+        cb.put("9");
         System.out.println(cb.chatcount.toString());
         System.out.println(cb.chatroom.toString());
 
