@@ -19,17 +19,12 @@ import java.util.stream.Collector;
 public class ChatServer {
     private User[] users;
     private int maxMessages;
-    int count = 0;
     int cookieID;
     String command;
-    String uname;
-    String upass;
     CircularBuffer cb;
 
 
     public ChatServer(User[] users, int maxMessages) {
-
-        // TODO Complete the constructor
         this.maxMessages = maxMessages;
         cb = new CircularBuffer(maxMessages);
         this.users = users;
@@ -312,7 +307,7 @@ public class ChatServer {
 
 
     public String getMessages(String[] args) {
-        int numMessages = Integer.parseInt(args[2]);
+        int numMessages = Integer.parseInt(args[0]);
         if (numMessages < 0)
             return "Failure:\t24\tINVALID_VALUE_ERROR ";
         String[] msg = cb.getNewest(numMessages);
@@ -362,7 +357,6 @@ public class ChatServer {
     public static void main(String[] args) {
 
         //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
-        //
     }
 
 

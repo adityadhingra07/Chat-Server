@@ -14,21 +14,30 @@ import java.util.*;
 public class SessionCookie {
 
     private long cookieID;
-    public static int timeoutLength = 300;
-    long oldTime;
-    long updatedTime;
+    public static int timeoutLength;
+    //long oldTime;
+    long time;
+    //long updatedTime;
+
     public SessionCookie(long cookieID) {
         this.cookieID = cookieID;
-        oldTime = System.currentTimeMillis();
+        this.oldTime = System.currentTimeMillis();
+        this.timeoutLength = 300;
     }
 
     public boolean hasTimedOut() {
-        long timeElapsed = updatedTime * 1000;
-        if (timeElapsed == timeoutLength) {
+//        long timeElapsed = updatedTime * 1000;
+//        if (timeElapsed >= timeoutLength) {
+//            return true;
+//        }
+//
+//        return false;
+        long newtime = System.currentTimeMillis();
+        if ((newtime - time) * 1000 >= timeoutLength) {
             return true;
         }
-
         return false;
+
     }
     /** before edit
     public long getUpdatedTimeOfActivity() {
@@ -39,8 +48,9 @@ public class SessionCookie {
     }
      */
     public void updateTimeOfActivity() {
-        long newTime = System.currentTimeMillis();
-        updatedTime = newTime - oldTime;
+//        long newTime = System.currentTimeMillis();
+//        updatedTime = newTime - oldTime;
+        time = System.currentTimeMillis();
     }
 
     public long getID() {
