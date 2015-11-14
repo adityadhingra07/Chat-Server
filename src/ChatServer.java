@@ -18,6 +18,10 @@ public class ChatServer {
     private int maxMessages;
     int count = 0;
     int cookieID;
+    String command;
+    String uname;
+    String upass;
+    String cookit;
 
     public ChatServer(User[] users, int maxMessages) {
         // TODO Complete the constructor
@@ -105,9 +109,9 @@ public class ChatServer {
      * @param request - the full line of the client request (CRLF included)
      * @return the server response
      */
-    public  String parseRequest(String request) {
+    public String parseRequest(String request) {
         // TODO: Replace the following code with the actual code
-        
+
         char[] strChar = request.toCharArray();
         strChar = Arrays.copyOf(strChar, strChar.length - 2);
         request = new String(strChar);
@@ -118,33 +122,72 @@ public class ChatServer {
         }
         request = compiledString;
         String[] checkerarg = compiledString.split(" ");
-        if (checkerarg.length != 3 ) {
-            return "error message for incorrect number of arguments";
+
+        if (checkerarg.length != 3 && checkerarg.length == 4) {
+
+        } else if (checkerarg.length !=3){
+            return "failure:error message for incorrect number of arguments";
         }
-        if (!(checkerarg[0].toUpperCase().equals("ADD-USER"))) {
+        command = checkerarg[0];
+
+        if (!(command.equals("ADD-USER")) || !(command.equals("USER-LOGIN")) || !(command.equals("POST-MESSAGE"))
+                || !(command.equals("GET-MESSAGES")))
+            return "failure:incorrect command or parameters error";
+        if (!(command.toUpperCase().equals("ADD-USER"))) {
             for (int i = 0; i < users.length; i++) {
-
+                if (command.toUpperCase().equals(users[i].getName())) {
+                    if (users[i].getCookie() == null) {
+                        return "failure:LUser not autheticated message";
+                    } else if (users[i].getCookie().hasTimedOut()) {
+                        users[i].setCookie(null);
+                        return "daliuere:Cookie timeout message";
+                    } else {
+                        continue;
+                    }
+                }
             }
+        } else {
+            if (command.equals("ADD-USER")) {
+                return addUser(checkerarg);
+            }
+            if (command.equals("USER-LOGIN"))
+                return userLogin(checkerarg);
+            if (command.equals("POST-MESSAGE"))
+                return postMessage(checkerarg,checkerarg[2]);
+            if (command.equals("GET-MESSAGES"))
+                return getMessages(checkerarg);
+
+
         }
 
 
-
-
-
-        return request;
+        return "unknown";
     }
 
     //Protocol methods
     public String postMessage(String[] args, String name) {
-        for (int i = 0; i < args.length ; i++) {
+        for (int i = 0; i < args.length; i++) {
             args[i] = StringUtils.trimWhitespace(args[i]);
             if (args[i].length() <= 0) {
                 return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
             }
 
-            return String.format("%s:\t%s",name,args[i]);
+            return String.format("%s:\t%s", name, args[i]);
         }
 
+        return null;
+    }
+
+    public String addUser(String[] args) {
+        return null;
+    }
+
+    public String userLogin(String[] args) {
+        return  null;
+    }
+
+
+    public String getMessages(String[] args) {
         return null;
     }
 
@@ -161,15 +204,10 @@ public class ChatServer {
 //        }
 //    }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
-        System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
+        //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
     }
-
-
-
-
-
 
 
     //Protocol methods end
