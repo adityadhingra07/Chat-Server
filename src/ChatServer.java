@@ -17,10 +17,20 @@ public class ChatServer {
     private User[] users;
     private int maxMessages;
     int count = 0;
+    int cookieID;
+
     public ChatServer(User[] users, int maxMessages) {
         // TODO Complete the constructor
         this.users = users;
-
+        Random randomifier = new Random();
+        int num1 = randomifier.nextInt(9);
+        int num2 = randomifier.nextInt(9);
+        int num3 = randomifier.nextInt(9);
+        int num4 = randomifier.nextInt(9);
+        String FourCode = "" + num1 + num2 + num3 + num4;
+        int ID = Integer.parseInt(FourCode);
+        cookieID = ID;
+        users[0] = new User("root", "cs180", new SessionCookie(cookieID));
     }
 
     /**
@@ -95,7 +105,7 @@ public class ChatServer {
      * @param request - the full line of the client request (CRLF included)
      * @return the server response
      */
-    public static String parseRequest(String request) {
+    public  String parseRequest(String request) {
         // TODO: Replace the following code with the actual code
         
         char[] strChar = request.toCharArray();
@@ -111,6 +121,14 @@ public class ChatServer {
         if (checkerarg.length != 3 ) {
             return "error message for incorrect number of arguments";
         }
+        if (!(checkerarg[0].toUpperCase().equals("ADD-USER"))) {
+            for (int i = 0; i < users.length; i++) {
+
+            }
+        }
+
+
+
 
 
         return request;
@@ -123,8 +141,10 @@ public class ChatServer {
             if (args[i].length() <= 0) {
                 return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
             }
+
             return String.format("%s:\t%s",name,args[i]);
         }
+
         return null;
     }
 
