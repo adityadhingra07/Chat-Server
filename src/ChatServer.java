@@ -23,6 +23,7 @@ public class ChatServer {
     int cookieID;
     String command;
     CircularBuffer cb;
+    int count;
 
 
     public ChatServer(User[] users, int maxMessages) {
@@ -39,6 +40,8 @@ public class ChatServer {
         cookieID = ID;
         //System.out.println(cookieID);
         //System.out.println(FourCode);
+        count++;
+        users = Arrays.copyOf(users,count);
         users[0] = new User("root", "cs180", new SessionCookie(cookieID));
     }
 
@@ -280,6 +283,8 @@ public class ChatServer {
                 return "Failure: ERROR MESSAGE #22";
             }
         }
+        count++;
+        users = Arrays.copyOf(users,count);
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {
                 users[i] = userNew;
