@@ -41,7 +41,7 @@ public class ChatServer {
         //System.out.println(cookieID);
         //System.out.println(FourCode);
         count++;
-        users = Arrays.copyOf(users,count);
+        users = Arrays.copyOf(users, count);
         users[0] = new User("root", "cs180", new SessionCookie(cookieID));
     }
 
@@ -276,23 +276,22 @@ public class ChatServer {
 //        if (checkAlphabet == false)
 //            return "Failure: Username can ony contain the following [A-Za-z0-9]";
 
+        cookie = cookie.substring(0, cookie.length() - 2);
 
-        User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(args[0])));
+        User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(cookie)));
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(userNew.getName())) {
                 return "Failure: ERROR MESSAGE #22";
             }
         }
         count++;
-        users = Arrays.copyOf(users,count);
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] == null) {
-                users[i] = userNew;
-                return "SUCCESS\r\n";
-            }
-        }
+        users = Arrays.copyOf(users, count);
+        users[count - 1] = userNew;
+        return "SUCCESS\r\n";
+
+
         //return "Failure: no add user unkown";
-        return "Failure: ERROR MESSAGE #00";
+        // return "Failure: ERROR MESSAGE #00";
     }
 
     public String userLogin(String[] args) {
@@ -410,7 +409,7 @@ public class ChatServer {
     public static void main(String[] args) {
         ChatServer c = new ChatServer(new User[0], 200);
         System.out.println(c.parseRequest("User-login\troot\tcs180\r\n").length());
-        
+
     }
 
 }
