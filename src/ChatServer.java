@@ -408,9 +408,9 @@ public class ChatServer {
 
 
     public static void main(String[] args) {
-
-        //System.out.println(parseRequest("User-login\troot\tcs180\r\n").length());
         ChatServer c = new ChatServer(new User[0], 200);
+        System.out.println(c.parseRequest("User-login\troot\tcs180\r\n").length());
+        
     }
 
 }
