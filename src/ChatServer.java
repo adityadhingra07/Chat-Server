@@ -275,8 +275,8 @@ public class ChatServer {
 //        }
 //        if (checkAlphabet == false)
 //            return "Failure: Username can ony contain the following [A-Za-z0-9]";
-
-        cookie = cookie.substring(0, cookie.length() - 2);
+        //IDK ABOUT THIS
+        //cookie = cookie.substring(0, cookie.length() - 2);
 
         User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(cookie)));
         for (int i = 0; i < users.length; i++) {
