@@ -127,7 +127,7 @@ public class ChatServer {
 //        request = new String(strChar);
         int position = request.indexOf("\r\n");
         if (position == -1)
-            return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
+            return "FAILURE\t11\tUnknown Command Error: Command unknown in pos check.\r\n";
 
         request = request.substring(0, position);
         String[] checkerarg = request.split("\t");
@@ -149,13 +149,13 @@ public class ChatServer {
 //            //return "Failure: ERROR MESSAGE #10";
 //            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
 //        }
-        if (checkerarg.length != 3) {
-            if (checkerarg.length != 4) {
-                //return "failure:error message for incorrect number of arguments";
-                //return "Failure: ERROR MESSAGE #10";
-                return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
-            }
-        }
+//        if (checkerarg.length != 3) {
+//            if (checkerarg.length != 4) {
+//                //return "failure:error message for incorrect number of arguments";
+//                //return "Failure: ERROR MESSAGE #10";
+//                return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+//            }
+//        }
         command = checkerarg[0];
 
         if (!(command.equals("ADD-USER")) | !(command.equals("USER-LOGIN")) | !(command.equals("POST-MESSAGE"))
@@ -206,7 +206,7 @@ public class ChatServer {
 
 //        return "unknown:parse request";
 //        return "Failure: ERROR MESSAGE #11";
-        return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
+        return "FAILURE\t11\tUnknown Command Error: Command unknown in end.\r\n";
 
     }
 
