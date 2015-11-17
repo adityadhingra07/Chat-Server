@@ -120,75 +120,94 @@ public class ChatServer {
     public String parseRequest(String request) {
         // TODO: Replace the following code with the actual code
 
-        char[] strChar = request.toCharArray();
-        strChar = Arrays.copyOf(strChar, strChar.length - 2);
-        request = new String(strChar);
-        String[] stringTemp = request.split("\t");
-        String compiledString = "";
-        for (int i = 0; i < stringTemp.length; i++) {
-            compiledString = compiledString + stringTemp[i] + " ";
-        }
-        request = compiledString;
-        String[] checkerarg = compiledString.split(" ");
+        if (request == null)
+            return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
+//        char[] strChar = request.toCharArray();
+//        strChar = Arrays.copyOf(strChar, strChar.length - 2);
+//        request = new String(strChar);
+        int position = request.indexOf("\r\n");
+        if (position == -1)
+            return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
 
-        if (checkerarg.length != 3 && checkerarg.length == 4) {
+        request = request.substring(0, position);
+        String[] checkerarg = request.split("\t");
+//        for (int i = 0; i < checkerarg.length; i++) {
+//            System.out.print(checkerarg[i] + " ");
+//            System.out.println(checkerarg[i].length());
+//        }
+//        String compiledString = "";
+//        for (int i = 0; i < stringTemp.length; i++) {
+//            compiledString = compiledString + stringTemp[i] + " ";
+//        }
+////        request = compiledString;
+//        String[] checkerarg = compiledString.split(" ");
 
-        } else if (checkerarg.length != 3) {
-            //return "failure:error message for incorrect number of arguments";
-            //return "Failure: ERROR MESSAGE #10";
-            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+//        if (checkerarg.length != 3 && checkerarg.length == 4) {
+//
+//        } else if (checkerarg.length != 3) {
+//            //return "failure:error message for incorrect number of arguments";
+//            //return "Failure: ERROR MESSAGE #10";
+//            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+//        }
+        if (checkerarg.length != 3) {
+            if (checkerarg.length != 4) {
+                //return "failure:error message for incorrect number of arguments";
+                //return "Failure: ERROR MESSAGE #10";
+                return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+            }
         }
         command = checkerarg[0];
 
-        if (!(command.equals("ADD-USER")) || !(command.equals("USER-LOGIN")) || !(command.equals("POST-MESSAGE"))
-                || !(command.equals("GET-MESSAGES"))) {
+        if (!(command.equals("ADD-USER")) | !(command.equals("USER-LOGIN")) | !(command.equals("POST-MESSAGE"))
+                | !(command.equals("GET-MESSAGES"))) {
             //return "failure:incorrect command or parameters error";
             //return "Failure: ERROR MESSAGE #10";
-            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect in method check.\r\n";
         }
-        if (!(command.toUpperCase().equals("ADD-USER"))) {
+//        if (!(command.toUpperCase().equals("ADD-USER"))) {
+//            for (int i = 0; i < users.length; i++) {
+//                if (command.toUpperCase().equals(users[i].getName())) {
+//                    if (users[i].getCookie() == null) {
+//                        //user not logged in message
+//                        //return "Failure: ERROR MESSAGE #23";
+//
+//                    } else if (users[i].getCookie().hasTimedOut()) {
+//                        users[i].setCookie(null);
+////                        return "Failure:Cookie timeout message";
+//                        //return "Failure: ERROR MESSAGE #05";
+//                        return "FAILURE\t05\tCookie Timeout Error: Your login cookie has timed out.\r\n";
+//                    } else {
+//                        continue;
+//                    }
+//                }
+//            }
+//        } else {
+        if (command.equals("ADD-USER")) {
+            return addUser(checkerarg);
+        }
+        if (command.equals("USER-LOGIN"))
+            return userLogin(checkerarg);
+        if (command.equals("POST-MESSAGE")) {
+            int foodId = Integer.parseInt(checkerarg[1]);
+            String name = "";
             for (int i = 0; i < users.length; i++) {
-                if (command.toUpperCase().equals(users[i].getName())) {
-                    if (users[i].getCookie() == null) {
-                        //user not logged in message
-                        //return "Failure: ERROR MESSAGE #23";
+                if (users[i].getCookie().getID() == foodId)
+                    name = users[i].getName();
 
-                    } else if (users[i].getCookie().hasTimedOut()) {
-                        users[i].setCookie(null);
-//                        return "Failure:Cookie timeout message";
-                        //return "Failure: ERROR MESSAGE #05";
-                        return "FAILURE\t05\tCookie Timeout Error: Your login cookie has timed out.\r\n";
-                    } else {
-                        continue;
-                    }
-                }
             }
-        } else {
-            if (command.equals("ADD-USER")) {
-                return addUser(checkerarg);
-            }
-            if (command.equals("USER-LOGIN"))
-                return userLogin(checkerarg);
-            if (command.equals("POST-MESSAGE")) {
-                int foodId = Integer.parseInt(checkerarg[1]);
-                String name = "";
-                for (int i = 0; i < users.length; i++) {
-                    if (users[i].getCookie().getID() == foodId)
-                        name = users[i].getName();
-
-                }
-                return postMessage(checkerarg, name);
-            }
-            if (command.equals("GET-MESSAGES"))
-                return getMessages(checkerarg);
-
-
+            return postMessage(checkerarg, name);
         }
+        if (command.equals("GET-MESSAGES"))
+            return getMessages(checkerarg);
+
+
+        //}
 
 
 //        return "unknown:parse request";
 //        return "Failure: ERROR MESSAGE #11";
         return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
+
     }
 
     //PROTOCOL METHODS : START HERE
