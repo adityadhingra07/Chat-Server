@@ -359,8 +359,9 @@ public class ChatServer {
                     // user not logged in error
 //                    return "Failure: ERROR MESSAGE #23";
                     return "FAILURE\t23\tLogin Error: The specified user has not logged in to the server.\r\n";
-                } else
+                } else {
                     continue;
+                }
             }
         }
         for (int i = 0; i < users.length; i++) {
