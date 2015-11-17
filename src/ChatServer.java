@@ -135,25 +135,29 @@ public class ChatServer {
 
         } else if (checkerarg.length != 3) {
             //return "failure:error message for incorrect number of arguments";
-            return "Failure: ERROR MESSAGE #10";
+            //return "Failure: ERROR MESSAGE #10";
+            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
         }
         command = checkerarg[0];
 
         if (!(command.equals("ADD-USER")) || !(command.equals("USER-LOGIN")) || !(command.equals("POST-MESSAGE"))
                 || !(command.equals("GET-MESSAGES"))) {
             //return "failure:incorrect command or parameters error";
-            return "Failure: ERROR MESSAGE #10";
+            //return "Failure: ERROR MESSAGE #10";
+            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
         }
         if (!(command.toUpperCase().equals("ADD-USER"))) {
             for (int i = 0; i < users.length; i++) {
                 if (command.toUpperCase().equals(users[i].getName())) {
                     if (users[i].getCookie() == null) {
                         //user not logged in message
-                        return "Failure: ERROR MESSAGE #23";
+                        //return "Failure: ERROR MESSAGE #23";
+
                     } else if (users[i].getCookie().hasTimedOut()) {
                         users[i].setCookie(null);
 //                        return "Failure:Cookie timeout message";
-                        return "Failure: ERROR MESSAGE #05";
+                        //return "Failure: ERROR MESSAGE #05";
+                        return "FAILURE\t05\tCookie Timeout Error: Your login cookie has timed out.\r\n";
                     } else {
                         continue;
                     }
@@ -183,7 +187,8 @@ public class ChatServer {
 
 
 //        return "unknown:parse request";
-        return "Failure: ERROR MESSAGE #11";
+//        return "Failure: ERROR MESSAGE #11";
+        return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
     }
 
     //PROTOCOL METHODS : START HERE
@@ -198,23 +203,27 @@ public class ChatServer {
         boolean check = true;
         if (!(uname.length() >= 1 && uname.length() <= 20)) {
             check = false;
-            return "Failure: ERROR MESSAGE #24";
+//            return "Failure: ERROR MESSAGE #24";
+            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
         }
         if (!(pass.length() >= 4 && pass.length() <= 40)) {
             check = false;
-            return "Failure: ERROR MESSAGE #24";
+            //            return "Failure: ERROR MESSAGE #24";
+            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
         }
         // 2. AlphaNumeric Check
         for (int i = 0; i < uname.length(); i++) {
             if (!(Character.isLetterOrDigit(uname.charAt(i)))) {
                 check = false;
-                return "Failure: ERROR MESSAGE #24";
+                //            return "Failure: ERROR MESSAGE #24";
+                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
             }
         }
         for (int i = 0; i < pass.length(); i++) {
             if (!(Character.isLetterOrDigit(pass.charAt(i)))) {
                 check = false;
-                return "Failure: ERROR MESSAGE #24";
+                //            return "Failure: ERROR MESSAGE #24";
+                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
             }
         }
         //CHECKS COMPLETE : Errors have been reported.
@@ -281,7 +290,8 @@ public class ChatServer {
         User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(cookie)));
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(userNew.getName())) {
-                return "Failure: ERROR MESSAGE #22";
+//                return "Failure: ERROR MESSAGE #22";
+                return "FAILURE\t22\tUser Error: User already exists.\r\n";
             }
         }
         count++;
@@ -290,7 +300,7 @@ public class ChatServer {
         return "SUCCESS\r\n";
 
 
-        //return "Failure: no add user unkown";
+        //return "Failure: no add user unknown";
         // return "Failure: ERROR MESSAGE #00";
     }
 
@@ -321,19 +331,23 @@ public class ChatServer {
                             return String.format("SUCCESS\t%04D\r\n", cookieID);
                         }
                         //wrong password error
-                        return "Failure: ERROR MESSAGE #21";
+//                        return "Failure: ERROR MESSAGE #21";
+                        return "FAILURE\t21\tAuthentication Error: User already exists.\r\n";
                     }
 //                    return "Failure: User already signed in";
-                    return "Failure: ERROR MESSAGE #25";
+//                    return "Failure: ERROR MESSAGE #25";
+                    return "FAILURE\t25\tUser Connected Error: User already logged in.\r\n";
                 }
                 // "Failure: user dies not exist"
-                return "Failure: ERROR MESSAGE #20";
+//                return "Failure: ERROR MESSAGE #20";
+                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
 
             }
 
         }
         //return "unknown login";
-        return "Failure: ERROR MESSAGE #00";
+//        return "Failure: ERROR MESSAGE #00";
+        return "FAILURE\t00\tUnknown Error: An unknown error occurred. This was likely caused by an uncaught exception.\r\n";
     }
 
     public String postMessage(String[] args, String name) {
@@ -343,7 +357,8 @@ public class ChatServer {
             if (users[i].getName().equals(name)) {
                 if (users[i].getCookie() == null) {
                     // user not logged in error
-                    return "Failure: ERROR MESSAGE #23";
+//                    return "Failure: ERROR MESSAGE #23";
+                    return "FAILURE\t23\tLogin Error: The specified user has not logged in to the server.\r\n";
                 } else
                     continue;
             }
@@ -352,7 +367,8 @@ public class ChatServer {
             if (users[i].getName().equals(name)) {
                 if (users[i].getCookie().hasTimedOut() == true) {
                     // cookie timed out error
-                    return "Failure: ERROR MESSAGE #05";
+                    //return "Failure: ERROR MESSAGE #05";
+                    return "FAILURE\t05\tCookie Timeout Error: Your login cookie has timed out.\r\n";
                 } else
                     continue;
             }
@@ -362,7 +378,8 @@ public class ChatServer {
         String noSpaceMessage = message.trim();
         if (noSpaceMessage.length() < 1) {
 //            return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
-            return "Failure: ERROR MESSAGE #10";
+//            //return "Failure: ERROR MESSAGE #10";
+            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
         }
 
         String msg = String.format("%s: %s", name, message);
@@ -372,8 +389,10 @@ public class ChatServer {
 
     public String getMessages(String[] args) {
         int numMessages = Integer.parseInt(args[1]);
-        if (numMessages < 0)
-            return "Failure:\t24\tINVALID_VALUE_ERROR ";
+        if (numMessages < 0) {
+//                      return "Failure: ERROR MESSAGE #24";
+            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
+        }
         String[] msg = cb.getNewest(numMessages);
         String finalmsg = "SUCCESS\\t";
         for (int i = 0; i < msg.length; i++) {
