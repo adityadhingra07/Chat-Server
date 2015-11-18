@@ -27,23 +27,10 @@ public class ChatServer {
 
 
     public ChatServer(User[] users, int maxMessages) {
-        this.users = users;
         this.maxMessages = maxMessages;
         cb = new CircularBuffer(maxMessages);
-        Random randomifier = new Random();
-        int num1 = randomifier.nextInt(10000);
-        //                    int num2 = randomifier.nextInt(9);
-        //                  return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";  int num3 = randomifier.nextInt(9);
-        //                    int num4 = randomifier.nextInt(9);
-        String FourCode = String.format("%04d", num1);
-        int ID = Integer.parseInt(FourCode);
-        int cookieID = ID;
-        //System.out.println(cookieID);
-        //System.out.println(FourCode);
-        count = this.users.length;
-        if (count == 0)
-            count++;
-        this.users = Arrays.copyOf(this.users, count);
+        count = users.length + 1;
+        this.users = Arrays.copyOf(users, count);
         //users[0] = new User("root", "cs180", new SessionCookie(cookieID));
         this.users[count - 1] = new User("root", "cs180", null);
     }

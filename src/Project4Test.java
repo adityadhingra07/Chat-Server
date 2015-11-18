@@ -160,6 +160,7 @@ public class Project4Test {
 
         String student = chatServer.userLogin(new String[] { "USER-LOGIN", "greg", "greg" });
         assertTrue("ChatServer: 'userLogin' incorrect response format", student.endsWith("\r\n"));
+        System.out.println(student);
         assertTrue("ChatServer: 'userLogin' can not log in with a valid user", student.matches("SUCCESS\t\\d+\r\n"));
     }
 
