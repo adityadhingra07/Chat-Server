@@ -356,7 +356,7 @@ public class ChatServer {
 
 
     public String postMessage(String[] args, String name) {
-        String message = args[1];
+        String message = args[2];
 //        String noSpaceMessage = StringUtils.trimWhitespace(message);
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(name)) {
@@ -400,13 +400,13 @@ public class ChatServer {
     }
 
     public String getMessages(String[] args) {
-        int numMessages = Integer.parseInt(args[1]);
+        int numMessages = Integer.parseInt(args[2]);
         if (numMessages < 0) {
 //                      return "Failure: ERROR MESSAGE #24";
             return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
         }
         String[] msg = cb.getNewest(numMessages);
-        String finalmsg = "SUCCESS\\t";
+        String finalmsg = "SUCCESS\t";
         for (int i = 0; i < msg.length; i++) {
             if (i == msg.length - 1) {
                 finalmsg += msg[i] + "\r\n";
