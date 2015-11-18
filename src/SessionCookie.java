@@ -34,7 +34,7 @@ public class SessionCookie {
 //
 //        return false;
         long newtime = System.currentTimeMillis();
-        if ((newtime - time) * 1000 >= timeoutLength) {
+        if ((newtime - time) * 1000 >= timeoutLength) {//might be divide
             return true;
         }
         return false;
