@@ -225,7 +225,6 @@ public class ChatServer {
 //        return "Failure: ERROR MESSAGE #11";
 
 
-
     //PROTOCOL METHODS : START HERE
 
     public String addUser(String[] args) {
@@ -339,44 +338,70 @@ public class ChatServer {
         // return "Failure: ERROR MESSAGE #00";
     }
 
+    public void makeCookieID() {//creates a cookie id
+        Random randomifier = new Random();
+        int num1 = randomifier.nextInt(10000);
+        int num2 = randomifier.nextInt(9);
+//                    int num3 = randomifier.nextInt(9);
+//                    int num4 = randomifier.nextInt(9);
+        String FourCode = String.format("%04d", num1);
+        int ID = Integer.parseInt(FourCode);
+//                        cookieID = ID;
+        cookieID = Integer.parseInt(FourCode);
+    }
+
     public String userLogin(String[] args) {
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(args[1])) {
                 if (users[i].getCookie() == null) {
                     if (users[i].getPassword().equals(args[2])) {
-                        Random randomifier = new Random();
-                        int num1 = randomifier.nextInt(10000);
-//                    int num2 = randomifier.nextInt(9);
-//                    int num3 = randomifier.nextInt(9);
-//                    int num4 = randomifier.nextInt(9);
-                        String FourCode = String.format("%04d", num1);
-                        int ID = Integer.parseInt(FourCode);
-                        cookieID = ID;
-                        boolean cookieUnique = false;
-                        while (cookieUnique != true) {
-                            for (int j = 0; j < users.length; j++) {
-                                if (users[j].getCookie().getID() == cookieID)
-                                    cookieUnique = false;
-                                else
-                                    cookieUnique = true;
+                        boolean cookieset = false;
+                        System.out.println("going into first while loop in user login");
+                        while (cookieset = false) {//checks whether the cookie is unique or not
+                            boolean cookieUnique = true;
+                            int j = 0;
+                            makeCookieID();
+                            System.out.println("going into 2nd the while loop in userlogin");
+                            while (cookieUnique == true && j < users.length) {
+                                for (j = 0; j < users.length; j++) {
+                                    if (users[j].getCookie().getID() == (long) cookieID) {
+                                        cookieUnique = false;
+                                        break;
+                                    }
+//                                else
+//                                    cookieUnique = true;
+                                }
+                            }
+                            System.out.println("coming out of the second while loop in user login");
+                            if (cookieUnique == true) {
+                                users[i].setCookie(new SessionCookie(cookieID));
+                                cookieset = true;
                             }
                         }
-                        if (cookieUnique == true) {
-                            users[i].setCookie(new SessionCookie((long) cookieID));
-                            return String.format("SUCCESS\t%04D\r\n", cookieID);
-                        }
-                        //wrong password error
-//                        return "Failure: ERROR MESSAGE #21";
-                        return "FAILURE\t21\tAuthentication Error: User already exists.\r\n";
+                        System.out.println("coming out of the first while loop in user login");
+                        return String.format("SUCCESS\t%04D\r\n", cookieID);
                     }
+
+
+                    //wrong password error
+//                        return "Failure: ERROR MESSAGE #21";
+
+                 else {
+                    return "FAILURE\t21\tAuthentication Error: Incorrect password.\r\n";
+                }
+
 //                    return "Failure: User already signed in";
 //                    return "Failure: ERROR MESSAGE #25";
+
+                } else {
                     return "FAILURE\t25\tUser Connected Error: User already logged in.\r\n";
                 }
                 // "Failure: user dies not exist"
 //                return "Failure: ERROR MESSAGE #20";
-                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
 
+
+            } else {
+                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
             }
 
         }
