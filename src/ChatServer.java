@@ -42,7 +42,7 @@ public class ChatServer {
         //System.out.println(FourCode);
         count++;
         users = Arrays.copyOf(users, count);
-        users[0] = new User("root", "cs180", new SessionCookie(cookieID));
+        //users[0] = new User("root", "cs180", new SessionCookie(cookieID));
         users[0] = new User("root", "cs180", null);
     }
 
@@ -162,12 +162,12 @@ public class ChatServer {
 //        }
         command = checkerarg[0];
 
-//        if (!(command.equals("ADD-USER")) | !(command.equals("USER-LOGIN")) | !(command.equals("POST-MESSAGE"))
-//                | !(command.equals("GET-MESSAGES"))) {
-//            //return "failure:incorrect command or parameters error";
-//            //return "Failure: ERROR MESSAGE #10";
-//            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect in method check.\r\n";
-//        }
+        if ((!(command.equals("ADD-USER"))) & (!(command.equals("USER-LOGIN"))) & (!(command.equals("POST-MESSAGE")))
+                & (!(command.equals("GET-MESSAGES")))) {
+            //return "failure:incorrect command or parameters error";
+            //return "Failure: ERROR MESSAGE #10";
+            return "FAILURE\t11\tUnknown Command Error: Command unknown in end.\r\n";
+        }
 //        if (!(command.toUpperCase().equals("ADD-USER"))) {
 //            for (int i = 0; i < users.length; i++) {
 //                if (command.toUpperCase().equals(users[i].getName())) {
@@ -186,45 +186,39 @@ public class ChatServer {
 //                }
 //            }
 //        } else {
-        if (checkerarg.length > 3) {
+        if (checkerarg.length > 2 && checkerarg.length < 5) {
             if (checkerarg.length == 4) {
                 if (command.equals("ADD-USER")) {
                     return addUser(checkerarg);
                 }
-            }
-            else {
-                return "FAILURE\t10\tFormat Command Error: Your Format is incorrect in method check2.\r\n";
-            }
-        }
-        else if (checkerarg.length == 3) {
-            if (command.equals("USER-LOGIN"))
-                return userLogin(checkerarg);
-            if (command.equals("POST-MESSAGE")) {
-                int foodId = Integer.parseInt(checkerarg[1]);
-                String name = "";
-                for (int i = 0; i < users.length; i++) {
-                    if (users[i].getCookie().getID() == foodId)
-                        name = users[i].getName();
+            } else if (checkerarg.length == 3) {
+                if (command.equals("USER-LOGIN"))
+                    return userLogin(checkerarg);
+                if (command.equals("POST-MESSAGE")) {
+                    long idOfUser = Long.parseLong(checkerarg[1]);
+                    String name = "";
+                    for (int i = 0; i < users.length; i++) {
+                        if (users[i].getCookie().getID() == idOfUser)
+                            name = users[i].getName();
 
+                    }
+                    return postMessage(checkerarg, name);
                 }
-                return postMessage(checkerarg, name);
+                if (command.equals("GET-MESSAGES")) {
+                    return getMessages(checkerarg);
+                }
             }
-            if (command.equals("GET-MESSAGES"))
-                return getMessages(checkerarg);
         }
-        else {
-            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect in method check2.\r\n";
-        }
+        return MessageFactory.makeErrorMessage(10);
+    }
 
 
-            //}
+    //}
 
 
 //        return "unknown:parse request";
 //        return "Failure: ERROR MESSAGE #11";
-            return "FAILURE\t11\tUnknown Command Error: Command unknown in end.\r\n";
 
-        }
 
 
     //PROTOCOL METHODS : START HERE
