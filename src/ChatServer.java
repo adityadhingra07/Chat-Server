@@ -166,7 +166,7 @@ public class ChatServer {
                 & (!(command.equals("GET-MESSAGES")))) {
             //return "failure:incorrect command or parameters error";
             //return "Failure: ERROR MESSAGE #10";
-            return "FAILURE\t11\tUnknown Command Error: Command unknown in end.\r\n";
+            return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
         }
 //        if (!(command.toUpperCase().equals("ADD-USER"))) {
 //            for (int i = 0; i < users.length; i++) {
@@ -189,12 +189,16 @@ public class ChatServer {
         if (checkerarg.length > 2 && checkerarg.length < 5) {
             if (checkerarg.length == 4) {
                 if (command.equals("ADD-USER")) {
+                    System.out.println("imma add you baby");
                     return addUser(checkerarg);
                 }
             } else if (checkerarg.length == 3) {
-                if (command.equals("USER-LOGIN"))
+                if (command.equals("USER-LOGIN")) {
+                    System.out.println("imma log you in baby");
                     return userLogin(checkerarg);
+                }
                 if (command.equals("POST-MESSAGE")) {
+                    System.out.println("say something im giving up on you ");
                     long idOfUser = Long.parseLong(checkerarg[1]);
                     String name = "";
                     for (int i = 0; i < users.length; i++) {
@@ -205,6 +209,7 @@ public class ChatServer {
                     return postMessage(checkerarg, name);
                 }
                 if (command.equals("GET-MESSAGES")) {
+                    System.out.println("going over the past aiyyy");
                     return getMessages(checkerarg);
                 }
             }
