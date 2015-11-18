@@ -20,16 +20,16 @@ public class ChatServer {
     private User[] users;
     private int maxMessages;
     SessionCookie cookie;
-    int cookieID;
+    //int cookieID;
     String command;
     CircularBuffer cb;
     int count;
 
 
     public ChatServer(User[] users, int maxMessages) {
+        this.users = users;
         this.maxMessages = maxMessages;
         cb = new CircularBuffer(maxMessages);
-        this.users = users;
         Random randomifier = new Random();
         int num1 = randomifier.nextInt(10000);
         //                    int num2 = randomifier.nextInt(9);
@@ -37,14 +37,17 @@ public class ChatServer {
         //                    int num4 = randomifier.nextInt(9);
         String FourCode = String.format("%04d", num1);
         int ID = Integer.parseInt(FourCode);
-        cookieID = ID;
+        int cookieID = ID;
         //System.out.println(cookieID);
         //System.out.println(FourCode);
-        count++;
-        users = Arrays.copyOf(users, count);
+        count = this.users.length;
+        if (count == 0)
+            count++;
+        this.users = Arrays.copyOf(this.users, count);
         //users[0] = new User("root", "cs180", new SessionCookie(cookieID));
-        users[0] = new User("root", "cs180", null);
+        this.users[count - 1] = new User("root", "cs180", null);
     }
+
 
     /**
      * This method begins server execution.
@@ -189,12 +192,12 @@ public class ChatServer {
         if (checkerarg.length > 2 && checkerarg.length < 5) {
             if (checkerarg.length == 4) {
                 if (command.equals("ADD-USER")) {
-                    System.out.println("imma add you baby");
+                    System.out.println("imma add you");
                     return addUser(checkerarg);
                 }
             } else if (checkerarg.length == 3) {
                 if (command.equals("USER-LOGIN")) {
-                    System.out.println("imma log you in baby");
+                    System.out.println("imma log you in");
                     return userLogin(checkerarg);
                 }
                 if (command.equals("POST-MESSAGE")) {
@@ -234,100 +237,32 @@ public class ChatServer {
 
         //CHECK FOR VALIDITY OF UNAME AND PASS
         // 1. Length Check
-        boolean check = true;
         if (!(uname.length() >= 1 && uname.length() <= 20)) {
-            check = false;
-//            return "Failure: ERROR MESSAGE #24";
-            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
+            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered1.\r\n";
         }
         if (!(pass.length() >= 4 && pass.length() <= 40)) {
-            check = false;
-            //            return "Failure: ERROR MESSAGE #24";
-            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
+            return "FAILURE\t24\tInvalid Value Error: Incorrect value entered2.\r\n";
         }
         // 2. AlphaNumeric Check
         for (int i = 0; i < uname.length(); i++) {
             if (!(Character.isLetterOrDigit(uname.charAt(i)))) {
-                check = false;
-                //            return "Failure: ERROR MESSAGE #24";
-                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
+                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered3.\r\n";
             }
         }
         for (int i = 0; i < pass.length(); i++) {
             if (!(Character.isLetterOrDigit(pass.charAt(i)))) {
-                check = false;
-                //            return "Failure: ERROR MESSAGE #24";
-                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered.\r\n";
+                return "FAILURE\t24\tInvalid Value Error: Incorrect value entered4.\r\n";
             }
         }
         //CHECKS COMPLETE : Errors have been reported.
 
-//        boolean checkAlphabet = true;
-//        boolean checkNumba = true;
-//        String viableCheckString = "" + args[2] + " " + args[3];
-//        String[] viableArray = viableCheckString.split(" ");
-//        char[] uname = viableArray[0].toCharArray();
-//        char[] pass = viableArray[1].toCharArray();
-//        if ((uname.length < 1 && uname.length > 20))
-//            return "Failure: incorrect length of username";
-//        if ((pass.length < 4 && pass.length > 40))
-//            return "Failure: incorrect length of password";
-//        while (checkAlphabet == false) {
-//            for (int j = 0; j < uname.length; j++) {
-//                if (!(Character.isLetterOrDigit(uname[j]))) {
-//                    checkAlphabet = false;
-//
-//                }
-//            }
-//
-//            for (int j = 0; j < pass.length; j++) {
-//                if (!(Character.isLetterOrDigit(pass[j]))) {
-//                    checkAlphabet = false;
-//                }
-//            }
-//        }
 
-
-//        while (checkAlphabet == true) {
-//            for (int j = 0; j < uname.length; j++) {
-//                if (!(Character.isLetter(uname[j]))) {
-//                    checkAlphabet = false;
-//
-//                }
-//            }
-//
-//            for (int j = 0; j < pass.length; j++) {
-//                if (!(Character.isLetter(pass[j]))) {
-//                    checkAlphabet = false;
-//                }
-//            }
-//        }
-//        while (checkNumba == true) {
-//            for (int j = 0; j < uname.length; j++) {
-//                if ((!(Character.isLetter(uname[j]))) && !(Character.isLetter(uname[j]))) {
-//                    checkNumba = false;
-//
-//                }
-//            }
-//
-//            for (int j = 0; j < pass.length; j++) {
-//                if ((!(Character.isLetter(pass[j]))) && !(Character.isLetter(pass[j]))) {
-//                    checkNumba = false;
-//                }
-//            }
-//        }
-//        if (checkAlphabet == false)
-//            return "Failure: Username can ony contain the following [A-Za-z0-9]";
-        //IDK ABOUT THIS
-        //cookie = cookie.substring(0, cookie.length() - 2);
-
-        User userNew = new User(args[1], args[2], new SessionCookie(Long.parseLong(cookie)));
         for (int i = 0; i < users.length; i++) {
-            if (users[i].getName().equals(userNew.getName())) {
-//                return "Failure: ERROR MESSAGE #22";
-                return "FAILURE\t22\tUser Error: User already exists.\r\n";
+            if (users[i].getName().equals(uname)) {
+              return "FAILURE\t22\tUser Error: User already exists5.\r\n";
             }
         }
+        User userNew = new User(uname, pass, null);
         count++;
         users = Arrays.copyOf(users, count);
         users[count - 1] = userNew;
@@ -338,77 +273,100 @@ public class ChatServer {
         // return "Failure: ERROR MESSAGE #00";
     }
 
-    public void makeCookieID() {//creates a cookie id
+    public long makeCookieID() {//creates a cookie id
         Random randomifier = new Random();
         int num1 = randomifier.nextInt(10000);
-        int num2 = randomifier.nextInt(9);
-//                    int num3 = randomifier.nextInt(9);
-//                    int num4 = randomifier.nextInt(9);
         String FourCode = String.format("%04d", num1);
-        int ID = Integer.parseInt(FourCode);
-//                        cookieID = ID;
-        cookieID = Integer.parseInt(FourCode);
+        return Long.parseLong(FourCode);
     }
 
     public String userLogin(String[] args) {
+        // find the user
+        // 1 for loop.
+        User user = null;
+        boolean passCorrect = false;
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(args[1])) {
-                if (users[i].getCookie() == null) {
-                    if (users[i].getPassword().equals(args[2])) {
-                        boolean cookieset = false;
-                        System.out.println("going into first while loop in user login");
-                        while (cookieset = false) {//checks whether the cookie is unique or not
-                            boolean cookieUnique = true;
-                            int j = 0;
-                            makeCookieID();
-                            System.out.println("going into 2nd the while loop in userlogin");
-                            while (cookieUnique == true && j < users.length) {
-                                for (j = 0; j < users.length; j++) {
-                                    if (users[j].getCookie().getID() == (long) cookieID) {
-                                        cookieUnique = false;
-                                        break;
-                                    }
-//                                else
-//                                    cookieUnique = true;
-                                }
-                            }
-                            System.out.println("coming out of the second while loop in user login");
-                            if (cookieUnique == true) {
-                                users[i].setCookie(new SessionCookie(cookieID));
-                                cookieset = true;
-                            }
-                        }
-                        System.out.println("coming out of the first while loop in user login");
-                        return String.format("SUCCESS\t%04D\r\n", cookieID);
-                    }
-
-
-                    //wrong password error
-//                        return "Failure: ERROR MESSAGE #21";
-
-                 else {
-                    return "FAILURE\t21\tAuthentication Error: Incorrect password.\r\n";
-                }
-
-//                    return "Failure: User already signed in";
-//                    return "Failure: ERROR MESSAGE #25";
-
-                } else {
-                    return "FAILURE\t25\tUser Connected Error: User already logged in.\r\n";
-                }
-                // "Failure: user dies not exist"
-//                return "Failure: ERROR MESSAGE #20";
-
-
-            } else {
-                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
+                user = users[i];
             }
-
         }
-        //return "unknown login";
-//        return "Failure: ERROR MESSAGE #00";
-        return "FAILURE\t00\tUnknown Error: An unknown error occurred. This was likely caused by an uncaught exception.\r\n";
+        if (user == null) {
+            return MessageFactory.makeErrorMessage(20);
+        }
+        // check password
+        // check cookie
+        if (!user.getPassword().equals(args[2])) {
+            return MessageFactory.makeErrorMessage(21);
+        }
+
+        if (user.getCookie() != null)
+            return MessageFactory.makeErrorMessage(25);
+        long cookieID = makeCookieID();
+        user.setCookie(new SessionCookie(cookieID));
+        return String.format("SUCCESS\t%04d\r\n", cookieID);
     }
+
+
+//
+//
+//        for (int i = 0; i < users.length; i++) {
+//            if (users[i].getName().equals(args[1])) {
+//                if (users[i].getCookie() == null) {
+//                    if (users[i].getPassword().equals(args[2])) {
+//                        boolean cookieset = false;
+//                        System.out.println("going into first while loop in user login");
+//                        while (cookieset = false) {//checks whether the cookie is unique or not
+//                            boolean cookieUnique = true;
+//                            int j = 0;
+//                            makeCookieID();
+//                            System.out.println("going into 2nd the while loop in userlogin");
+//                            while (cookieUnique == true && j < users.length) {
+//                                for (j = 0; j < users.length; j++) {
+//                                    if (users[j].getCookie().getID() == (long) cookieID) {
+//                                        cookieUnique = false;
+//                                        break;
+//                                    }
+////                                else
+////                                    cookieUnique = true;
+//                                }
+//                            }
+//                            System.out.println("coming out of the second while loop in user login");
+//                            if (cookieUnique == true) {
+//                                users[i].setCookie(new SessionCookie(cookieID));
+//                                cookieset = true;
+//                            }
+//                        }
+//                        System.out.println("coming out of the first while loop in user login");
+//                        return String.format("SUCCESS\t%04D\r\n", cookieID);
+//                    }
+//
+//
+//                    //wrong password error
+////                        return "Failure: ERROR MESSAGE #21";
+//
+//                 else {
+//                    return "FAILURE\t21\tAuthentication Error: Incorrect password.\r\n";
+//                }
+//
+////                    return "Failure: User already signed in";
+////                    return "Failure: ERROR MESSAGE #25";
+//
+//                } else {
+//                    return "FAILURE\t25\tUser Connected Error: User already logged in.\r\n";
+//                }
+//                // "Failure: user dies not exist"
+////                return "Failure: ERROR MESSAGE #20";
+//
+//
+//            } else {
+//                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
+//            }
+//
+//        }
+//        //return "unknown login";
+////        return "Failure: ERROR MESSAGE #00";
+//        return "FAILURE\t00\tUnknown Error: An unknown error occurred. This was likely caused by an uncaught exception.\r\n";
+
 
     public String postMessage(String[] args, String name) {
         String message = args[1];

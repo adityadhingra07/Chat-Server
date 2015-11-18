@@ -116,22 +116,22 @@ public class CircularBuffer {
         return FinalArray;
     }
 
-//    public static void main(String[] args) {
-//        CircularBuffer cb = new CircularBuffer(4);
-//        cb.put("0");
-//        cb.put("1");
-//        cb.put("2");
-//        cb.put("3");
-//        cb.put("4");
-//        cb.put("5");
-//        cb.put("6");
-//        cb.put("7");
-//        cb.put("8");
-//        cb.put("9");
-//        System.out.println(cb.chatcount.toString());
-//        System.out.println(cb.chatroom.toString());
-//        System.out.println(Arrays.toString(cb.getNewest(3)));
-//
-//    }
+    public static void main(String[] args) {
+        CircularBuffer cb = new CircularBuffer(4);
+        cb.put("dsfjkbdfjksbdfjskdf");
+        cb.put("dfskjbndsfjk");
+        cb.put("dfdnskjfn");
+        cb.put("dfuhsufdh");
+        cb.put("dsfkjbjkfds");
+        cb.put("fdkjbjdsfb");
+        cb.put("asfkjbfjkdsb");
+        cb.put("asdkb");
+        cb.put("asfdghjgk");
+        cb.put("sadjbads");
+        System.out.println(cb.chatcount.toString());
+        System.out.println(cb.chatroom.toString());
+        System.out.println(Arrays.toString(cb.getNewest(3)));
+
+    }
 
 }
