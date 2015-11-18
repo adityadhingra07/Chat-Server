@@ -229,9 +229,9 @@ public class ChatServer {
     //PROTOCOL METHODS : START HERE
 
     public String addUser(String[] args) {
-        String cookie = args[0];
-        String uname = args[1];
-        String pass = args[2];
+        String cookie = args[1];
+        String uname = args[2];
+        String pass = args[3];
 
         //CHECK FOR VALIDITY OF UNAME AND PASS
         // 1. Length Check
