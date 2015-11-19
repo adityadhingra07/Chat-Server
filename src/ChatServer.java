@@ -273,9 +273,6 @@ public class ChatServer {
 
         String noSpaceMessage = message.trim();
         if (noSpaceMessage.length() < 1) {
-//            return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
-//            //return "Failure: ERROR MESSAGE #10";
-//            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
             return MessageFactory.makeErrorMessage(24);
         }
 
@@ -291,6 +288,7 @@ public class ChatServer {
     }
 
     public String getMessages(String[] args) {
+
         int numMessages = Integer.parseInt(args[2]);
         if (numMessages < 0) {
 //                      return "Failure: ERROR MESSAGE #24";
