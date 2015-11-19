@@ -113,9 +113,6 @@ public class ChatServer {
 
         if (request == null)
             return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
-//        char[] strChar = request.toCharArray();
-//        strChar = Arrays.copyOf(strChar, strChar.length - 2);
-//        request = new String(strChar);
         String[] checkerarg;
         int position = request.indexOf("\r\n");
         if (position == -1) {
@@ -125,31 +122,6 @@ public class ChatServer {
             checkerarg = request.split("\t");
         }
 
-//        for (int i = 0; i < checkerarg.length; i++) {
-//            System.out.print(checkerarg[i] + " ");
-//            System.out.println(checkerarg[i].length());
-//        }
-//        String compiledString = "";
-//        for (int i = 0; i < stringTemp.length; i++) {
-//            compiledString = compiledString + stringTemp[i] + " ";
-//        }
-////        request = compiledString;
-//        String[] checkerarg = compiledString.split(" ");
-
-//        if (checkerarg.length != 3 && checkerarg.length == 4) {
-//
-//        } else if (checkerarg.length != 3) {
-//            //return "failure:error message for incorrect number of arguments";
-//            //return "Failure: ERROR MESSAGE #10";
-//            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
-//        }
-//        if (checkerarg.length != 3) {
-//            if (checkerarg.length != 4) {
-//                //return "failure:error message for incorrect number of arguments";
-//                //return "Failure: ERROR MESSAGE #10";
-//                return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
-//            }
-//        }
         command = checkerarg[0];
 
         if ((!(command.equals("ADD-USER"))) & (!(command.equals("USER-LOGIN"))) & (!(command.equals("POST-MESSAGE")))
@@ -158,24 +130,7 @@ public class ChatServer {
             //return "Failure: ERROR MESSAGE #10";
             return "FAILURE\t11\tUnknown Command Error: Command unknown.\r\n";
         }
-//        if (!(command.toUpperCase().equals("ADD-USER"))) {
-//            for (int i = 0; i < users.length; i++) {
-//                if (command.toUpperCase().equals(users[i].getName())) {
-//                    if (users[i].getCookie() == null) {
-//                        //user not logged in message
-//                        //return "Failure: ERROR MESSAGE #23";
-//
-//                    } else if (users[i].getCookie().hasTimedOut()) {
-//                        users[i].setCookie(null);
-////                        return "Failure:Cookie timeout message";
-//                        //return "Failure: ERROR MESSAGE #05";
-//                        return "FAILURE\t05\tCookie Timeout Error: Your login cookie has timed out.\r\n";
-//                    } else {
-//                        continue;
-//                    }
-//                }
-//            }
-//        } else {
+
         if (checkerarg.length > 2 && checkerarg.length < 5) {
             if (checkerarg.length == 4) {
                 if (command.equals("ADD-USER")) {
@@ -206,9 +161,6 @@ public class ChatServer {
         }
         return MessageFactory.makeErrorMessage(10);
     }
-
-
-    //}
 
 
 //        return "unknown:parse request";
@@ -293,75 +245,13 @@ public class ChatServer {
         return String.format("SUCCESS\t%04d\r\n", cookieID);
     }
 
-
-//
-//
-//        for (int i = 0; i < users.length; i++) {
-//            if (users[i].getName().equals(args[1])) {
-//                if (users[i].getCookie() == null) {
-//                    if (users[i].getPassword().equals(args[2])) {
-//                        boolean cookieset = false;
-//                        System.out.println("going into first while loop in user login");
-//                        while (cookieset = false) {//checks whether the cookie is unique or not
-//                            boolean cookieUnique = true;
-//                            int j = 0;
-//                            makeCookieID();
-//                            System.out.println("going into 2nd the while loop in userlogin");
-//                            while (cookieUnique == true && j < users.length) {
-//                                for (j = 0; j < users.length; j++) {
-//                                    if (users[j].getCookie().getID() == (long) cookieID) {
-//                                        cookieUnique = false;
-//                                        break;
-//                                    }
-////                                else
-////                                    cookieUnique = true;
-//                                }
-//                            }
-//                            System.out.println("coming out of the second while loop in user login");
-//                            if (cookieUnique == true) {
-//                                users[i].setCookie(new SessionCookie(cookieID));
-//                                cookieset = true;
-//                            }
-//                        }
-//                        System.out.println("coming out of the first while loop in user login");
-//                        return String.format("SUCCESS\t%04D\r\n", cookieID);
-//                    }
-//
-//
-//                    //wrong password error
-////                        return "Failure: ERROR MESSAGE #21";
-//
-//                 else {
-//                    return "FAILURE\t21\tAuthentication Error: Incorrect password.\r\n";
-//                }
-//
-////                    return "Failure: User already signed in";
-////                    return "Failure: ERROR MESSAGE #25";
-//
-//                } else {
-//                    return "FAILURE\t25\tUser Connected Error: User already logged in.\r\n";
-//                }
-//                // "Failure: user dies not exist"
-////                return "Failure: ERROR MESSAGE #20";
-//
-//
-//            } else {
-//                return "FAILURE\t20\tUser Username Lookup Error: The specified user does not exist.\t\n\r\n";
-//            }
-//
-//        }
-//        //return "unknown login";
-////        return "Failure: ERROR MESSAGE #00";
-//        return "FAILURE\t00\tUnknown Error: An unknown error occurred. This was likely caused by an uncaught exception.\r\n";
-
-
     public String postMessage(String[] args, String name) {
         String message = args[2];
-//        String noSpaceMessage = StringUtils.trimWhitespace(message);
+
         for (int i = 0; i < users.length; i++) {
             if (users[i].getName().equals(name)) {
                 if (users[i].getCookie() == null) {
-                    // user not logged in error
+//                     user not logged in error
 //                    return "Failure: ERROR MESSAGE #23";
                     return "FAILURE\t23\tLogin Error: The specified user has not logged in to the server.\r\n";
                 } else {
@@ -418,25 +308,7 @@ public class ChatServer {
     }
 
     //PROTOCOL METHODS: END HERE
-
-//        msg = msg.substring(1,msg.length() -1);
-//        String[] messages = msg.split(",");
-//        for (int i = 0; i < messages.length; i++) {
-//            String start = messages[i].substring(0,messages[i].length() -2);
-//            String mid = "";
-//            String end = messages[i].substring(messages[i].length() -1,messages.length);
-//            for (int j = 0; j < users.length; j++) {
-//                if (users[i].getCookie().getID()== Integer.parseInt(start.substring(0,messages[i].length() -1)));
-//                    mid = users[i].getName();
-//
-//            }
-//            messages[i] = "" + start + mid + end;
-//        }
-//        String temp = Arrays.toString(messages);
-//        String output = temp.replaceAll(",","\t");
-//        return String.format("SUCCESS\t%s",output);
-
-
+    
     public static void main(String[] args) {
         ChatServer c = new ChatServer(new User[0], 200);
         System.out.println(c.parseRequest("User-login\troot\tcs180\r\n").length());
