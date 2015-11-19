@@ -275,7 +275,8 @@ public class ChatServer {
         if (noSpaceMessage.length() < 1) {
 //            return "SOME ERROR MESSAGE I HAVE TO LOOK UP FOR STRING WITHOUT ONE CHARACTER";
 //            //return "Failure: ERROR MESSAGE #10";
-            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+//            return "FAILURE\t10\tFormat Command Error: Your Format is incorrect.\r\n";
+            return MessageFactory.makeErrorMessage(24);
         }
 
         //UPDATING THE USERS SESSION COOKIE
