@@ -295,14 +295,13 @@ public class ChatServer {
         System.out.println(cookieId);
         User user = null;
         for (int i = 0; i < users.length; i++) {
-            System.out.println("init");
             if (users[i].getCookie() != null) {
                 if (users[i].getCookie().getID() == cookieId) {
                     user = users[i];
                 }
             }
         }
-        //asd
+
         if (user.getCookie().hasTimedOut()) {
             return MessageFactory.makeErrorMessage(5);
         }
