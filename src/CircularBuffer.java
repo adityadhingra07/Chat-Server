@@ -108,7 +108,7 @@ public class CircularBuffer {
         }
         String[] FinalArray = new String[numMessages];
         int ind = 0;
-        for (int j = tempChatroom.length - numMessages + 1; j < tempChatroom.length; j++) {
+        for (int j = tempChatroom.length - numMessages; j < tempChatroom.length; j++) {
             FinalArray[ind] = tempChatroom[j];
             ind++;
         }
