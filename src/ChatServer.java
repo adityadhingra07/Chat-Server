@@ -291,13 +291,13 @@ public class ChatServer {
         if (args[1] == null) {
             return MessageFactory.makeErrorMessage(23);
         }
-        User user= null;
+        User user = null;
         for (int i = 0; i < users.length; i++) {
             if (users[i].getCookie().getID() == Long.parseLong(args[1])) {
-                user = new User(users[i].getName(),users[i].getPassword(),users[i].getCookie());
+                user = users[i];
             }
         }
-        if (user.getCookie().hasTimedOut()) {
+        if (user.getCookie() == null) {
             return MessageFactory.makeErrorMessage(5);
         }
         int numMessages = Integer.parseInt(args[2]);
