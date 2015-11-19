@@ -302,7 +302,6 @@ public class ChatServer {
                 }
             }
         }
-        //asd
         if (user.getCookie().hasTimedOut()) {
             return MessageFactory.makeErrorMessage(5);
         }
