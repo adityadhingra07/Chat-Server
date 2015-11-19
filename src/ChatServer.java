@@ -286,7 +286,7 @@ public class ChatServer {
         }
         String msg = String.format("%s: %s", name, message);
         cb.put(msg);
-        return msg;
+        return "SUCCESS\r\n";
     }
 
     public String getMessages(String[] args) {
