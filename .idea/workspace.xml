@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5aece0db-fc6d-41b8-9925-8f68b4384a33" name="Default" comment="">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChatServer.java" afterPath="$PROJECT_DIR$/src/ChatServer.java" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chat-Server/ChatServer.class" afterPath="$PROJECT_DIR$/out/production/Chat-Server/ChatServer.class" />
+>>>>>>> origin/master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> origin/master
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chat-Server/ChatServer.class" afterPath="$PROJECT_DIR$/out/production/Chat-Server/ChatServer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChatServer.java" afterPath="$PROJECT_DIR$/src/ChatServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> parent of dee64f9... 2
     </list>
     <ignored path="Chat-Server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,8 +53,23 @@
       <file leaf-file-name="ChatServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ChatServer.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.9288703">
               <caret line="306" column="52" selection-start-line="306" selection-start-column="52" selection-end-line="306" selection-end-column="52" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="0.5943601">
+              <caret line="302" column="13" selection-start-line="302" selection-start-column="13" selection-end-line="302" selection-end-column="13" />
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="305" column="45" selection-start-line="305" selection-start-column="45" selection-end-line="305" selection-end-column="45" />
+>>>>>>> origin/master
+=======
+            <state vertical-scroll-proportion="0.8394794">
+              <caret line="304" column="42" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+>>>>>>> parent of dee64f9... 2
+>>>>>>> origin/master
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,8 +92,21 @@
       <file leaf-file-name="Project4Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project4Test.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
+=======
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+              <caret line="295" column="25" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="25" />
+=======
+            <state vertical-scroll-proportion="0.12133891">
+>>>>>>> origin/master
               <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+>>>>>>> origin/master
+=======
+              <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+>>>>>>> parent of dee64f9... 2
               <folding />
             </state>
           </provider>
@@ -165,8 +207,16 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
       <pane id="Scratches" />
       <pane id="Scope" />
+>>>>>>> origin/master
+=======
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+>>>>>>> parent of dee64f9... 2
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -201,7 +251,16 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <pane id="Scope" />
+      <pane id="Scratches" />
+=======
+>>>>>>> origin/master
       <pane id="PackagesPane" />
+=======
+      <pane id="Scratches" />
+>>>>>>> parent of dee64f9... 2
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1051,18 +1110,50 @@
     <entry file="file://$PROJECT_DIR$/src/Project4Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+          <folding />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <caret line="295" column="25" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="25" />
+=======
+          <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+>>>>>>> parent of dee64f9... 2
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatServer.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8394794">
+          <caret line="304" column="42" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+=======
+          <caret line="305" column="45" selection-start-line="305" selection-start-column="45" selection-end-line="305" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> origin/master
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.9288703">
           <caret line="306" column="52" selection-start-line="306" selection-start-column="52" selection-end-line="306" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+        <state vertical-scroll-proportion="0.12133891">
+          <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+          <folding />
+>>>>>>> origin/master
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
